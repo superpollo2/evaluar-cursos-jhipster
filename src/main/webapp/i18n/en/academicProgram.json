@@ -1,0 +1,27 @@
+{
+  "evaluarCursosApp": {
+    "academicProgram": {
+      "home": {
+        "title": "Academic Programs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Academic Program",
+        "createOrEditLabel": "Create or edit a Academic Program",
+        "notFound": "No Academic Programs found"
+      },
+      "created": "A new Academic Program is created with identifier {{ param }}",
+      "updated": "A Academic Program is updated with identifier {{ param }}",
+      "deleted": "A Academic Program is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Academic Program {{ id }}?"
+      },
+      "detail": {
+        "title": "Academic Program"
+      },
+      "id": "ID",
+      "programId": "Program Id",
+      "programName": "Program Name",
+      "student": "Student",
+      "enrollCourse": "Enroll Course"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "applications": "*",
+  "changelogDate": "20230420183142",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "academic_program",
+  "fields": [
+    {
+      "fieldName": "programId",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "programName",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AcademicProgram",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "student",
+      "otherEntityRelationshipName": "program",
+      "relationshipName": "student",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enrollCourse",
+      "otherEntityRelationshipName": "academicProgram",
+      "relationshipName": "enrollCourse",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

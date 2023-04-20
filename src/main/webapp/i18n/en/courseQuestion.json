@@ -1,0 +1,25 @@
+{
+  "evaluarCursosApp": {
+    "courseQuestion": {
+      "home": {
+        "title": "Course Questions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Course Question",
+        "createOrEditLabel": "Create or edit a Course Question",
+        "notFound": "No Course Questions found"
+      },
+      "created": "A new Course Question is created with identifier {{ param }}",
+      "updated": "A Course Question is updated with identifier {{ param }}",
+      "deleted": "A Course Question is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Course Question {{ id }}?"
+      },
+      "detail": {
+        "title": "Course Question"
+      },
+      "id": "ID",
+      "questionId": "Question Id",
+      "courseQuestion": "Course Question"
+    }
+  }
+}

@@ -1,0 +1,121 @@
+
+
+entity UserO{
+	userName UUID
+	password String
+	email String unique
+	
+}
+
+entity Student {
+	studentId UUID
+	studentName String
+}
+
+entity AcademicProgram{
+	programId  UUID
+    programName String
+}
+
+entity Profesor  {
+	profesorId  UUID
+    profesorName String
+}
+
+entity EnrollCourse{
+	enrollId UUID
+    periodAcademic String
+    isEvaluated Integer
+    
+}
+
+entity Role {
+	roleId UUID
+    roleName String 
+}
+
+entity Course{
+	courseId UUID
+    courseName String 
+}
+
+entity AcademicPeriod{
+	periodId UUID
+    initPeriod Instant
+    finishPeriod Instant
+}
+
+entity CourseQuestion {
+	questionId UUID
+    courseQuestion String
+}
+
+entity ProfesorQuestion {
+	questionId UUID
+    profesorQuestion String
+}
+
+entity EvaluationCourse {
+	cScoreQuestionOne Integer
+    cScoreQuestionTwo Integer
+    cScoreQuestionThree Integer
+    cScoreQuestionFour Integer
+    cScoreQuestionFive Integer
+    cScoreQuestionSix Integer
+}
+
+entity EvaluationProfesor{
+	pScoreQuestionOne Integer
+    pScoreQuestionTwo Integer
+    pScoreQuestionThree Integer
+    pScoreQuestionFour Integer
+    pScoreQuestionFive Integer
+    pScoreQuestionSix Integer
+}
+
+entity TotalScoreCourse{
+	cAverageOne Integer
+    cAverageTwo Integer
+    cAverageThree Integer
+    cAverageFour Integer
+    cAverageFive Integer
+}
+
+entity TotalScoreProfesor{
+	pAverageOne Integer
+    pAverageTwo Integer
+    pAverageThree Integer
+    pAverageFour Integer
+    pAverageFive Integer
+}
+
+relationship OneToMany {
+	AcademicProgram to Student{program}
+    Role to UserO{role}
+    Student to EnrollCourse{student}
+    AcademicProgram to EnrollCourse{academicProgram}
+    Profesor to EnrollCourse{profesor}
+    AcademicPeriod to EnrollCourse{academicPeriod}
+    AcademicPeriod to TotalScoreCourse{academicPeriod}
+    Course to TotalScoreCourse{course}
+    AcademicPeriod to TotalScoreProfesor{academicPeriod}
+    Profesor to TotalScoreCourse{profesor}
+    
+}
+
+relationship OneToOne {
+	Student {user} to UserO 
+}
+
+relationship OneToOne {
+    Profesor{user} to UserO 
+}
+
+relationship OneToOne {
+   EvaluationCourse{enrollCourse} to  EnrollCourse 
+}
+
+relationship OneToOne {
+   EvaluationProfesor{enrollCourse} to  EnrollCourse 
+}
+

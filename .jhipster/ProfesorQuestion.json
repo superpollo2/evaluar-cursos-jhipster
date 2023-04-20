@@ -1,0 +1,24 @@
+{
+  "applications": "*",
+  "changelogDate": "20230420183148",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "profesor_question",
+  "fields": [
+    {
+      "fieldName": "questionId",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "profesorQuestion",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ProfesorQuestion",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

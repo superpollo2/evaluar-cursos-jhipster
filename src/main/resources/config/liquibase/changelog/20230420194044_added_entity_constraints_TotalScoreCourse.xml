@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity TotalScoreCourse.
+    -->
+    <changeSet id="20230420194044-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="academic_period_id"
+                                 baseTableName="total_score_course"
+                                 constraintName="fk_total_score_course__academic_period_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="academic_period"/>
+
+        <addForeignKeyConstraint baseColumnNames="course_id"
+                                 baseTableName="total_score_course"
+                                 constraintName="fk_total_score_course__course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+
+        <addForeignKeyConstraint baseColumnNames="profesor_id"
+                                 baseTableName="total_score_course"
+                                 constraintName="fk_total_score_course__profesor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profesor"/>
+    </changeSet>
+</databaseChangeLog>

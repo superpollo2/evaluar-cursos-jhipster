@@ -1,0 +1,27 @@
+{
+  "evaluarCursosApp": {
+    "userO": {
+      "home": {
+        "title": "User OS",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo User O",
+        "createOrEditLabel": "Crear o editar User O",
+        "notFound": "Ningún User OS encontrado"
+      },
+      "created": "Un nuevo User O ha sido creado con el identificador {{ param }}",
+      "updated": "Un User O ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un User O ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar User O {{ id }}?"
+      },
+      "detail": {
+        "title": "User O"
+      },
+      "id": "ID",
+      "userName": "User Name",
+      "password": "Password",
+      "email": "Email",
+      "role": "Role"
+    }
+  }
+}

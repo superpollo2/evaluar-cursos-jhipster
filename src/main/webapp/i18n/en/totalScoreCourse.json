@@ -1,0 +1,31 @@
+{
+  "evaluarCursosApp": {
+    "totalScoreCourse": {
+      "home": {
+        "title": "Total Score Courses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Total Score Course",
+        "createOrEditLabel": "Create or edit a Total Score Course",
+        "notFound": "No Total Score Courses found"
+      },
+      "created": "A new Total Score Course is created with identifier {{ param }}",
+      "updated": "A Total Score Course is updated with identifier {{ param }}",
+      "deleted": "A Total Score Course is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Total Score Course {{ id }}?"
+      },
+      "detail": {
+        "title": "Total Score Course"
+      },
+      "id": "ID",
+      "cAverageOne": "C Average One",
+      "cAverageTwo": "C Average Two",
+      "cAverageThree": "C Average Three",
+      "cAverageFour": "C Average Four",
+      "cAverageFive": "C Average Five",
+      "academicPeriod": "Academic Period",
+      "course": "Course",
+      "profesor": "Profesor"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity EnrollCourse.
+    -->
+    <changeSet id="20230420183144-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="student_id"
+                                 baseTableName="enroll_course"
+                                 constraintName="fk_enroll_course__student_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="student"/>
+
+        <addForeignKeyConstraint baseColumnNames="academic_program_id"
+                                 baseTableName="enroll_course"
+                                 constraintName="fk_enroll_course__academic_program_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="academic_program"/>
+
+        <addForeignKeyConstraint baseColumnNames="profesor_id"
+                                 baseTableName="enroll_course"
+                                 constraintName="fk_enroll_course__profesor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profesor"/>
+
+        <addForeignKeyConstraint baseColumnNames="academic_period_id"
+                                 baseTableName="enroll_course"
+                                 constraintName="fk_enroll_course__academic_period_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="academic_period"/>
+    </changeSet>
+</databaseChangeLog>

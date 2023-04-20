@@ -1,0 +1,25 @@
+{
+  "evaluarCursosApp": {
+    "profesorQuestion": {
+      "home": {
+        "title": "Profesor Questions",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Profesor Question",
+        "createOrEditLabel": "Crear o editar Profesor Question",
+        "notFound": "Ningún Profesor Questions encontrado"
+      },
+      "created": "Un nuevo Profesor Question ha sido creado con el identificador {{ param }}",
+      "updated": "Un Profesor Question ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Profesor Question ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Profesor Question {{ id }}?"
+      },
+      "detail": {
+        "title": "Profesor Question"
+      },
+      "id": "ID",
+      "questionId": "Question Id",
+      "profesorQuestion": "Profesor Question"
+    }
+  }
+}

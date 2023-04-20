@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20230420183143",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "profesor",
+  "fields": [
+    {
+      "fieldName": "profesorId",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "profesorName",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Profesor",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "userO",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "enrollCourse",
+      "otherEntityRelationshipName": "profesor",
+      "relationshipName": "enrollCourse",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "totalScoreCourse",
+      "otherEntityRelationshipName": "profesor",
+      "relationshipName": "totalScoreCourse",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

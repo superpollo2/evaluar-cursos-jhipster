@@ -1,0 +1,29 @@
+{
+  "evaluarCursosApp": {
+    "academicPeriod": {
+      "home": {
+        "title": "Academic Periods",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Academic Period",
+        "createOrEditLabel": "Crear o editar Academic Period",
+        "notFound": "Ningún Academic Periods encontrado"
+      },
+      "created": "Un nuevo Academic Period ha sido creado con el identificador {{ param }}",
+      "updated": "Un Academic Period ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Academic Period ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Academic Period {{ id }}?"
+      },
+      "detail": {
+        "title": "Academic Period"
+      },
+      "id": "ID",
+      "periodId": "Period Id",
+      "initPeriod": "Init Period",
+      "finishPeriod": "Finish Period",
+      "enrollCourse": "Enroll Course",
+      "totalScoreCourse": "Total Score Course",
+      "totalScoreProfesor": "Total Score Profesor"
+    }
+  }
+}

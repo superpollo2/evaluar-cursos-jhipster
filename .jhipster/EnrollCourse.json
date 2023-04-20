@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20230420183144",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "enroll_course",
+  "fields": [
+    {
+      "fieldName": "enrollId",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "periodAcademic",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isEvaluated",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "EnrollCourse",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "student",
+      "otherEntityRelationshipName": "enrollCourse",
+      "relationshipName": "student",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "academicProgram",
+      "otherEntityRelationshipName": "enrollCourse",
+      "relationshipName": "academicProgram",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "profesor",
+      "otherEntityRelationshipName": "enrollCourse",
+      "relationshipName": "profesor",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "academicPeriod",
+      "otherEntityRelationshipName": "enrollCourse",
+      "relationshipName": "academicPeriod",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,29 @@
+{
+  "evaluarCursosApp": {
+    "totalScoreProfesor": {
+      "home": {
+        "title": "Total Score Profesors",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Total Score Profesor",
+        "createOrEditLabel": "Crear o editar Total Score Profesor",
+        "notFound": "Ningún Total Score Profesors encontrado"
+      },
+      "created": "Un nuevo Total Score Profesor ha sido creado con el identificador {{ param }}",
+      "updated": "Un Total Score Profesor ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Total Score Profesor ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Total Score Profesor {{ id }}?"
+      },
+      "detail": {
+        "title": "Total Score Profesor"
+      },
+      "id": "ID",
+      "pAverageOne": "P Average One",
+      "pAverageTwo": "P Average Two",
+      "pAverageThree": "P Average Three",
+      "pAverageFour": "P Average Four",
+      "pAverageFive": "P Average Five",
+      "academicPeriod": "Academic Period"
+    }
+  }
+}

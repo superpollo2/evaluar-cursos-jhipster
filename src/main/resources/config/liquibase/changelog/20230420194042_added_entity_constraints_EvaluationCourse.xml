@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity EvaluationCourse.
+    -->
+    <changeSet id="20230420194042-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="enroll_course_id"
+                                 baseTableName="evaluation_course"
+                                 constraintName="fk_evaluation_course__enroll_course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="enroll_course"/>
+    </changeSet>
+</databaseChangeLog>

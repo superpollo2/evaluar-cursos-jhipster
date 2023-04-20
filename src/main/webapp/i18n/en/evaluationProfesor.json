@@ -1,0 +1,30 @@
+{
+  "evaluarCursosApp": {
+    "evaluationProfesor": {
+      "home": {
+        "title": "Evaluation Profesors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Evaluation Profesor",
+        "createOrEditLabel": "Create or edit a Evaluation Profesor",
+        "notFound": "No Evaluation Profesors found"
+      },
+      "created": "A new Evaluation Profesor is created with identifier {{ param }}",
+      "updated": "A Evaluation Profesor is updated with identifier {{ param }}",
+      "deleted": "A Evaluation Profesor is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Evaluation Profesor {{ id }}?"
+      },
+      "detail": {
+        "title": "Evaluation Profesor"
+      },
+      "id": "ID",
+      "pScoreQuestionOne": "P Score Question One",
+      "pScoreQuestionTwo": "P Score Question Two",
+      "pScoreQuestionThree": "P Score Question Three",
+      "pScoreQuestionFour": "P Score Question Four",
+      "pScoreQuestionFive": "P Score Question Five",
+      "pScoreQuestionSix": "P Score Question Six",
+      "enrollCourse": "Enroll Course"
+    }
+  }
+}

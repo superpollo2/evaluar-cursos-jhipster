@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20230420194045",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "total_score_profesor",
+  "fields": [
+    {
+      "fieldName": "pAverageOne",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pAverageTwo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pAverageThree",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pAverageFour",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pAverageFive",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TotalScoreProfesor",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "academicPeriod",
+      "otherEntityRelationshipName": "totalScoreProfesor",
+      "relationshipName": "academicPeriod",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

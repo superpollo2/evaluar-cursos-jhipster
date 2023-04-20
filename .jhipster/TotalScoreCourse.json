@@ -1,0 +1,55 @@
+{
+  "applications": "*",
+  "changelogDate": "20230420194044",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "total_score_course",
+  "fields": [
+    {
+      "fieldName": "cAverageOne",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cAverageTwo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cAverageThree",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cAverageFour",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cAverageFive",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TotalScoreCourse",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "academicPeriod",
+      "otherEntityRelationshipName": "totalScoreCourse",
+      "relationshipName": "academicPeriod",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "totalScoreCourse",
+      "relationshipName": "course",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "profesor",
+      "otherEntityRelationshipName": "totalScoreCourse",
+      "relationshipName": "profesor",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,30 @@
+{
+  "evaluarCursosApp": {
+    "evaluationCourse": {
+      "home": {
+        "title": "Evaluation Courses",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Evaluation Course",
+        "createOrEditLabel": "Crear o editar Evaluation Course",
+        "notFound": "Ningún Evaluation Courses encontrado"
+      },
+      "created": "Un nuevo Evaluation Course ha sido creado con el identificador {{ param }}",
+      "updated": "Un Evaluation Course ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Evaluation Course ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Evaluation Course {{ id }}?"
+      },
+      "detail": {
+        "title": "Evaluation Course"
+      },
+      "id": "ID",
+      "cScoreQuestionOne": "C Score Question One",
+      "cScoreQuestionTwo": "C Score Question Two",
+      "cScoreQuestionThree": "C Score Question Three",
+      "cScoreQuestionFour": "C Score Question Four",
+      "cScoreQuestionFive": "C Score Question Five",
+      "cScoreQuestionSix": "C Score Question Six",
+      "enrollCourse": "Enroll Course"
+    }
+  }
+}

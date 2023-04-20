@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20230420194042",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "evaluation_course",
+  "fields": [
+    {
+      "fieldName": "cScoreQuestionOne",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cScoreQuestionTwo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cScoreQuestionThree",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cScoreQuestionFour",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cScoreQuestionFive",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cScoreQuestionSix",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "EvaluationCourse",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "enrollCourse",
+      "ownerSide": true,
+      "relationshipName": "enrollCourse",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20230420194041",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "academic_period",
+  "fields": [
+    {
+      "fieldName": "periodId",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "initPeriod",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "finishPeriod",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AcademicPeriod",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "enrollCourse",
+      "otherEntityRelationshipName": "academicPeriod",
+      "relationshipName": "enrollCourse",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "totalScoreCourse",
+      "otherEntityRelationshipName": "academicPeriod",
+      "relationshipName": "totalScoreCourse",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "totalScoreProfesor",
+      "otherEntityRelationshipName": "academicPeriod",
+      "relationshipName": "totalScoreProfesor",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

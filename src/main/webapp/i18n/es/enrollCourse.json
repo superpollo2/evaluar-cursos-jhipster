@@ -1,0 +1,30 @@
+{
+  "evaluarCursosApp": {
+    "enrollCourse": {
+      "home": {
+        "title": "Enroll Courses",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Enroll Course",
+        "createOrEditLabel": "Crear o editar Enroll Course",
+        "notFound": "Ningún Enroll Courses encontrado"
+      },
+      "created": "Un nuevo Enroll Course ha sido creado con el identificador {{ param }}",
+      "updated": "Un Enroll Course ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Enroll Course ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Enroll Course {{ id }}?"
+      },
+      "detail": {
+        "title": "Enroll Course"
+      },
+      "id": "ID",
+      "enrollId": "Enroll Id",
+      "periodAcademic": "Period Academic",
+      "isEvaluated": "Is Evaluated",
+      "student": "Student",
+      "academicProgram": "Academic Program",
+      "profesor": "Profesor",
+      "academicPeriod": "Academic Period"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20230420194043",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "evaluation_profesor",
+  "fields": [
+    {
+      "fieldName": "pScoreQuestionOne",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pScoreQuestionTwo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pScoreQuestionThree",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pScoreQuestionFour",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pScoreQuestionFive",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pScoreQuestionSix",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "EvaluationProfesor",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "enrollCourse",
+      "ownerSide": true,
+      "relationshipName": "enrollCourse",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

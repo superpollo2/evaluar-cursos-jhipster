@@ -71,8 +71,7 @@ class AcademicPeriodGatlingTest extends Simulation {
             .post("/api/academic-periods")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
-                "periodId":null
-                , "initPeriod":"2020-01-01T00:00:00.000Z"
+                "initPeriod":"2020-01-01T00:00:00.000Z"
                 , "finishPeriod":"2020-01-01T00:00:00.000Z"
                 }""")).asJson
             .check(status.is(201))

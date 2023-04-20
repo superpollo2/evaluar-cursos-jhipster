@@ -121,9 +121,6 @@ public class CourseResource {
         Optional<Course> result = courseRepository
             .findById(course.getId())
             .map(existingCourse -> {
-                if (course.getCourseId() != null) {
-                    existingCourse.setCourseId(course.getCourseId());
-                }
                 if (course.getCourseName() != null) {
                     existingCourse.setCourseName(course.getCourseName());
                 }

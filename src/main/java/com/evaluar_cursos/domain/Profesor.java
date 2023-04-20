@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 
 /**
  * A Profesor.
@@ -25,10 +23,6 @@ public class Profesor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Type(type = "uuid-char")
-    @Column(name = "profesor_id", length = 36)
-    private UUID profesorId;
 
     @Column(name = "profesor_name")
     private String profesorName;
@@ -61,19 +55,6 @@ public class Profesor implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public UUID getProfesorId() {
-        return this.profesorId;
-    }
-
-    public Profesor profesorId(UUID profesorId) {
-        this.setProfesorId(profesorId);
-        return this;
-    }
-
-    public void setProfesorId(UUID profesorId) {
-        this.profesorId = profesorId;
     }
 
     public String getProfesorName() {
@@ -188,7 +169,6 @@ public class Profesor implements Serializable {
     public String toString() {
         return "Profesor{" +
             "id=" + getId() +
-            ", profesorId='" + getProfesorId() + "'" +
             ", profesorName='" + getProfesorName() + "'" +
             "}";
     }

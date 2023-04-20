@@ -52,9 +52,6 @@ export const Role = () => {
                   <Translate contentKey="evaluarCursosApp.role.id">ID</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="evaluarCursosApp.role.roleId">Role Id</Translate>
-                </th>
-                <th>
                   <Translate contentKey="evaluarCursosApp.role.roleName">Role Name</Translate>
                 </th>
                 <th />
@@ -68,7 +65,6 @@ export const Role = () => {
                       {role.id}
                     </Button>
                   </td>
-                  <td>{role.roleId}</td>
                   <td>{role.roleName}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

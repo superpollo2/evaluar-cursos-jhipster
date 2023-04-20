@@ -2,32 +2,28 @@ package com.evaluar_cursos.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.UUID;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
+import org.springframework.data.domain.Persistable;
 
 /**
  * A UserO.
  */
+@JsonIgnoreProperties(value = { "new" })
 @Entity
 @Table(name = "user_o")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class UserO implements Serializable {
+public class UserO implements Serializable, Persistable<String> {
 
     private static final long serialVersionUID = 1L;
 
+    @NotNull
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Type(type = "uuid-char")
-    @Column(name = "user_name", length = 36)
-    private UUID userName;
+    @Column(name = "user_name", nullable = false)
+    private String userName;
 
     @Column(name = "password")
     private String password;
@@ -35,35 +31,25 @@ public class UserO implements Serializable {
     @Column(name = "email", unique = true)
     private String email;
 
+    @Transient
+    private boolean isPersisted;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "userOS" }, allowSetters = true)
     private Role role;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
-        return this.id;
-    }
-
-    public UserO id(Long id) {
-        this.setId(id);
-        return this;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public UUID getUserName() {
+    public String getUserName() {
         return this.userName;
     }
 
-    public UserO userName(UUID userName) {
+    public UserO userName(String userName) {
         this.setUserName(userName);
         return this;
     }
 
-    public void setUserName(UUID userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
@@ -93,6 +79,28 @@ public class UserO implements Serializable {
         this.email = email;
     }
 
+    @Override
+    public String getId() {
+        return this.userName;
+    }
+
+    @Transient
+    @Override
+    public boolean isNew() {
+        return !this.isPersisted;
+    }
+
+    public UserO setIsPersisted() {
+        this.isPersisted = true;
+        return this;
+    }
+
+    @PostLoad
+    @PostPersist
+    public void updateEntityState() {
+        this.setIsPersisted();
+    }
+
     public Role getRole() {
         return this.role;
     }
@@ -116,7 +124,7 @@ public class UserO implements Serializable {
         if (!(o instanceof UserO)) {
             return false;
         }
-        return id != null && id.equals(((UserO) o).id);
+        return userName != null && userName.equals(((UserO) o).userName);
     }
 
     @Override
@@ -129,8 +137,7 @@ public class UserO implements Serializable {
     @Override
     public String toString() {
         return "UserO{" +
-            "id=" + getId() +
-            ", userName='" + getUserName() + "'" +
+            "userName=" + getUserName() +
             ", password='" + getPassword() + "'" +
             ", email='" + getEmail() + "'" +
             "}";

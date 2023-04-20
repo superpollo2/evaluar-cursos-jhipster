@@ -52,9 +52,6 @@ export const Profesor = () => {
                   <Translate contentKey="evaluarCursosApp.profesor.id">ID</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="evaluarCursosApp.profesor.profesorId">Profesor Id</Translate>
-                </th>
-                <th>
                   <Translate contentKey="evaluarCursosApp.profesor.profesorName">Profesor Name</Translate>
                 </th>
                 <th>
@@ -71,9 +68,8 @@ export const Profesor = () => {
                       {profesor.id}
                     </Button>
                   </td>
-                  <td>{profesor.profesorId}</td>
                   <td>{profesor.profesorName}</td>
-                  <td>{profesor.user ? <Link to={`/user-o/${profesor.user.id}`}>{profesor.user.id}</Link> : ''}</td>
+                  <td>{profesor.user ? <Link to={`/user-o/${profesor.user.userName}`}>{profesor.user.userName}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/profesor/${profesor.id}`} color="info" size="sm" data-cy="entityDetailsButton">

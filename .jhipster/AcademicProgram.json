@@ -6,10 +6,6 @@
   "entityTableName": "academic_program",
   "fields": [
     {
-      "fieldName": "programId",
-      "fieldType": "UUID"
-    },
-    {
       "fieldName": "programName",
       "fieldType": "String"
     }

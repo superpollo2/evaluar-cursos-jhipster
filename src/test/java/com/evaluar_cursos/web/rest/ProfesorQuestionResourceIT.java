@@ -10,7 +10,6 @@ import com.evaluar_cursos.domain.ProfesorQuestion;
 import com.evaluar_cursos.repository.ProfesorQuestionRepository;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class ProfesorQuestionResourceIT {
-
-    private static final UUID DEFAULT_QUESTION_ID = UUID.randomUUID();
-    private static final UUID UPDATED_QUESTION_ID = UUID.randomUUID();
 
     private static final String DEFAULT_PROFESOR_QUESTION = "AAAAAAAAAA";
     private static final String UPDATED_PROFESOR_QUESTION = "BBBBBBBBBB";
@@ -60,9 +56,7 @@ class ProfesorQuestionResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProfesorQuestion createEntity(EntityManager em) {
-        ProfesorQuestion profesorQuestion = new ProfesorQuestion()
-            .questionId(DEFAULT_QUESTION_ID)
-            .profesorQuestion(DEFAULT_PROFESOR_QUESTION);
+        ProfesorQuestion profesorQuestion = new ProfesorQuestion().profesorQuestion(DEFAULT_PROFESOR_QUESTION);
         return profesorQuestion;
     }
 
@@ -73,9 +67,7 @@ class ProfesorQuestionResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProfesorQuestion createUpdatedEntity(EntityManager em) {
-        ProfesorQuestion profesorQuestion = new ProfesorQuestion()
-            .questionId(UPDATED_QUESTION_ID)
-            .profesorQuestion(UPDATED_PROFESOR_QUESTION);
+        ProfesorQuestion profesorQuestion = new ProfesorQuestion().profesorQuestion(UPDATED_PROFESOR_QUESTION);
         return profesorQuestion;
     }
 
@@ -99,7 +91,6 @@ class ProfesorQuestionResourceIT {
         List<ProfesorQuestion> profesorQuestionList = profesorQuestionRepository.findAll();
         assertThat(profesorQuestionList).hasSize(databaseSizeBeforeCreate + 1);
         ProfesorQuestion testProfesorQuestion = profesorQuestionList.get(profesorQuestionList.size() - 1);
-        assertThat(testProfesorQuestion.getQuestionId()).isEqualTo(DEFAULT_QUESTION_ID);
         assertThat(testProfesorQuestion.getProfesorQuestion()).isEqualTo(DEFAULT_PROFESOR_QUESTION);
     }
 
@@ -135,7 +126,6 @@ class ProfesorQuestionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(profesorQuestion.getId().intValue())))
-            .andExpect(jsonPath("$.[*].questionId").value(hasItem(DEFAULT_QUESTION_ID.toString())))
             .andExpect(jsonPath("$.[*].profesorQuestion").value(hasItem(DEFAULT_PROFESOR_QUESTION)));
     }
 
@@ -151,7 +141,6 @@ class ProfesorQuestionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(profesorQuestion.getId().intValue()))
-            .andExpect(jsonPath("$.questionId").value(DEFAULT_QUESTION_ID.toString()))
             .andExpect(jsonPath("$.profesorQuestion").value(DEFAULT_PROFESOR_QUESTION));
     }
 
@@ -174,7 +163,7 @@ class ProfesorQuestionResourceIT {
         ProfesorQuestion updatedProfesorQuestion = profesorQuestionRepository.findById(profesorQuestion.getId()).get();
         // Disconnect from session so that the updates on updatedProfesorQuestion are not directly saved in db
         em.detach(updatedProfesorQuestion);
-        updatedProfesorQuestion.questionId(UPDATED_QUESTION_ID).profesorQuestion(UPDATED_PROFESOR_QUESTION);
+        updatedProfesorQuestion.profesorQuestion(UPDATED_PROFESOR_QUESTION);
 
         restProfesorQuestionMockMvc
             .perform(
@@ -188,7 +177,6 @@ class ProfesorQuestionResourceIT {
         List<ProfesorQuestion> profesorQuestionList = profesorQuestionRepository.findAll();
         assertThat(profesorQuestionList).hasSize(databaseSizeBeforeUpdate);
         ProfesorQuestion testProfesorQuestion = profesorQuestionList.get(profesorQuestionList.size() - 1);
-        assertThat(testProfesorQuestion.getQuestionId()).isEqualTo(UPDATED_QUESTION_ID);
         assertThat(testProfesorQuestion.getProfesorQuestion()).isEqualTo(UPDATED_PROFESOR_QUESTION);
     }
 
@@ -274,7 +262,6 @@ class ProfesorQuestionResourceIT {
         List<ProfesorQuestion> profesorQuestionList = profesorQuestionRepository.findAll();
         assertThat(profesorQuestionList).hasSize(databaseSizeBeforeUpdate);
         ProfesorQuestion testProfesorQuestion = profesorQuestionList.get(profesorQuestionList.size() - 1);
-        assertThat(testProfesorQuestion.getQuestionId()).isEqualTo(DEFAULT_QUESTION_ID);
         assertThat(testProfesorQuestion.getProfesorQuestion()).isEqualTo(DEFAULT_PROFESOR_QUESTION);
     }
 
@@ -290,7 +277,7 @@ class ProfesorQuestionResourceIT {
         ProfesorQuestion partialUpdatedProfesorQuestion = new ProfesorQuestion();
         partialUpdatedProfesorQuestion.setId(profesorQuestion.getId());
 
-        partialUpdatedProfesorQuestion.questionId(UPDATED_QUESTION_ID).profesorQuestion(UPDATED_PROFESOR_QUESTION);
+        partialUpdatedProfesorQuestion.profesorQuestion(UPDATED_PROFESOR_QUESTION);
 
         restProfesorQuestionMockMvc
             .perform(
@@ -304,7 +291,6 @@ class ProfesorQuestionResourceIT {
         List<ProfesorQuestion> profesorQuestionList = profesorQuestionRepository.findAll();
         assertThat(profesorQuestionList).hasSize(databaseSizeBeforeUpdate);
         ProfesorQuestion testProfesorQuestion = profesorQuestionList.get(profesorQuestionList.size() - 1);
-        assertThat(testProfesorQuestion.getQuestionId()).isEqualTo(UPDATED_QUESTION_ID);
         assertThat(testProfesorQuestion.getProfesorQuestion()).isEqualTo(UPDATED_PROFESOR_QUESTION);
     }
 

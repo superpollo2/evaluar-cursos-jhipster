@@ -10,7 +10,6 @@ import com.evaluar_cursos.domain.EnrollCourse;
 import com.evaluar_cursos.repository.EnrollCourseRepository;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class EnrollCourseResourceIT {
-
-    private static final UUID DEFAULT_ENROLL_ID = UUID.randomUUID();
-    private static final UUID UPDATED_ENROLL_ID = UUID.randomUUID();
 
     private static final String DEFAULT_PERIOD_ACADEMIC = "AAAAAAAAAA";
     private static final String UPDATED_PERIOD_ACADEMIC = "BBBBBBBBBB";
@@ -63,10 +59,7 @@ class EnrollCourseResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static EnrollCourse createEntity(EntityManager em) {
-        EnrollCourse enrollCourse = new EnrollCourse()
-            .enrollId(DEFAULT_ENROLL_ID)
-            .periodAcademic(DEFAULT_PERIOD_ACADEMIC)
-            .isEvaluated(DEFAULT_IS_EVALUATED);
+        EnrollCourse enrollCourse = new EnrollCourse().periodAcademic(DEFAULT_PERIOD_ACADEMIC).isEvaluated(DEFAULT_IS_EVALUATED);
         return enrollCourse;
     }
 
@@ -77,10 +70,7 @@ class EnrollCourseResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static EnrollCourse createUpdatedEntity(EntityManager em) {
-        EnrollCourse enrollCourse = new EnrollCourse()
-            .enrollId(UPDATED_ENROLL_ID)
-            .periodAcademic(UPDATED_PERIOD_ACADEMIC)
-            .isEvaluated(UPDATED_IS_EVALUATED);
+        EnrollCourse enrollCourse = new EnrollCourse().periodAcademic(UPDATED_PERIOD_ACADEMIC).isEvaluated(UPDATED_IS_EVALUATED);
         return enrollCourse;
     }
 
@@ -102,7 +92,6 @@ class EnrollCourseResourceIT {
         List<EnrollCourse> enrollCourseList = enrollCourseRepository.findAll();
         assertThat(enrollCourseList).hasSize(databaseSizeBeforeCreate + 1);
         EnrollCourse testEnrollCourse = enrollCourseList.get(enrollCourseList.size() - 1);
-        assertThat(testEnrollCourse.getEnrollId()).isEqualTo(DEFAULT_ENROLL_ID);
         assertThat(testEnrollCourse.getPeriodAcademic()).isEqualTo(DEFAULT_PERIOD_ACADEMIC);
         assertThat(testEnrollCourse.getIsEvaluated()).isEqualTo(DEFAULT_IS_EVALUATED);
     }
@@ -137,7 +126,6 @@ class EnrollCourseResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(enrollCourse.getId().intValue())))
-            .andExpect(jsonPath("$.[*].enrollId").value(hasItem(DEFAULT_ENROLL_ID.toString())))
             .andExpect(jsonPath("$.[*].periodAcademic").value(hasItem(DEFAULT_PERIOD_ACADEMIC)))
             .andExpect(jsonPath("$.[*].isEvaluated").value(hasItem(DEFAULT_IS_EVALUATED)));
     }
@@ -154,7 +142,6 @@ class EnrollCourseResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(enrollCourse.getId().intValue()))
-            .andExpect(jsonPath("$.enrollId").value(DEFAULT_ENROLL_ID.toString()))
             .andExpect(jsonPath("$.periodAcademic").value(DEFAULT_PERIOD_ACADEMIC))
             .andExpect(jsonPath("$.isEvaluated").value(DEFAULT_IS_EVALUATED));
     }
@@ -178,7 +165,7 @@ class EnrollCourseResourceIT {
         EnrollCourse updatedEnrollCourse = enrollCourseRepository.findById(enrollCourse.getId()).get();
         // Disconnect from session so that the updates on updatedEnrollCourse are not directly saved in db
         em.detach(updatedEnrollCourse);
-        updatedEnrollCourse.enrollId(UPDATED_ENROLL_ID).periodAcademic(UPDATED_PERIOD_ACADEMIC).isEvaluated(UPDATED_IS_EVALUATED);
+        updatedEnrollCourse.periodAcademic(UPDATED_PERIOD_ACADEMIC).isEvaluated(UPDATED_IS_EVALUATED);
 
         restEnrollCourseMockMvc
             .perform(
@@ -192,7 +179,6 @@ class EnrollCourseResourceIT {
         List<EnrollCourse> enrollCourseList = enrollCourseRepository.findAll();
         assertThat(enrollCourseList).hasSize(databaseSizeBeforeUpdate);
         EnrollCourse testEnrollCourse = enrollCourseList.get(enrollCourseList.size() - 1);
-        assertThat(testEnrollCourse.getEnrollId()).isEqualTo(UPDATED_ENROLL_ID);
         assertThat(testEnrollCourse.getPeriodAcademic()).isEqualTo(UPDATED_PERIOD_ACADEMIC);
         assertThat(testEnrollCourse.getIsEvaluated()).isEqualTo(UPDATED_IS_EVALUATED);
     }
@@ -265,8 +251,6 @@ class EnrollCourseResourceIT {
         EnrollCourse partialUpdatedEnrollCourse = new EnrollCourse();
         partialUpdatedEnrollCourse.setId(enrollCourse.getId());
 
-        partialUpdatedEnrollCourse.isEvaluated(UPDATED_IS_EVALUATED);
-
         restEnrollCourseMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedEnrollCourse.getId())
@@ -279,9 +263,8 @@ class EnrollCourseResourceIT {
         List<EnrollCourse> enrollCourseList = enrollCourseRepository.findAll();
         assertThat(enrollCourseList).hasSize(databaseSizeBeforeUpdate);
         EnrollCourse testEnrollCourse = enrollCourseList.get(enrollCourseList.size() - 1);
-        assertThat(testEnrollCourse.getEnrollId()).isEqualTo(DEFAULT_ENROLL_ID);
         assertThat(testEnrollCourse.getPeriodAcademic()).isEqualTo(DEFAULT_PERIOD_ACADEMIC);
-        assertThat(testEnrollCourse.getIsEvaluated()).isEqualTo(UPDATED_IS_EVALUATED);
+        assertThat(testEnrollCourse.getIsEvaluated()).isEqualTo(DEFAULT_IS_EVALUATED);
     }
 
     @Test
@@ -296,7 +279,7 @@ class EnrollCourseResourceIT {
         EnrollCourse partialUpdatedEnrollCourse = new EnrollCourse();
         partialUpdatedEnrollCourse.setId(enrollCourse.getId());
 
-        partialUpdatedEnrollCourse.enrollId(UPDATED_ENROLL_ID).periodAcademic(UPDATED_PERIOD_ACADEMIC).isEvaluated(UPDATED_IS_EVALUATED);
+        partialUpdatedEnrollCourse.periodAcademic(UPDATED_PERIOD_ACADEMIC).isEvaluated(UPDATED_IS_EVALUATED);
 
         restEnrollCourseMockMvc
             .perform(
@@ -310,7 +293,6 @@ class EnrollCourseResourceIT {
         List<EnrollCourse> enrollCourseList = enrollCourseRepository.findAll();
         assertThat(enrollCourseList).hasSize(databaseSizeBeforeUpdate);
         EnrollCourse testEnrollCourse = enrollCourseList.get(enrollCourseList.size() - 1);
-        assertThat(testEnrollCourse.getEnrollId()).isEqualTo(UPDATED_ENROLL_ID);
         assertThat(testEnrollCourse.getPeriodAcademic()).isEqualTo(UPDATED_PERIOD_ACADEMIC);
         assertThat(testEnrollCourse.getIsEvaluated()).isEqualTo(UPDATED_IS_EVALUATED);
     }

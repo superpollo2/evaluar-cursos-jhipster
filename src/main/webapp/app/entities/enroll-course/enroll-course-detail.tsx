@@ -33,12 +33,6 @@ export const EnrollCourseDetail = () => {
           </dt>
           <dd>{enrollCourseEntity.id}</dd>
           <dt>
-            <span id="enrollId">
-              <Translate contentKey="evaluarCursosApp.enrollCourse.enrollId">Enroll Id</Translate>
-            </span>
-          </dt>
-          <dd>{enrollCourseEntity.enrollId}</dd>
-          <dt>
             <span id="periodAcademic">
               <Translate contentKey="evaluarCursosApp.enrollCourse.periodAcademic">Period Academic</Translate>
             </span>

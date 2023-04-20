@@ -11,11 +11,8 @@
     -->
     <changeSet id="20230420183140-1" author="jhipster">
         <createTable tableName="user_o">
-            <column name="id" type="bigint" autoIncrement="true">
+            <column name="user_name" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="user_name" type="${uuidType}">
-                <constraints nullable="true" />
             </column>
             <column name="password" type="varchar(255)">
                 <constraints nullable="true" />
@@ -46,7 +43,6 @@
                   separator=";"
                   tableName="user_o"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
             <column name="user_name" type="string"/>
             <column name="password" type="string"/>
             <column name="email" type="string"/>

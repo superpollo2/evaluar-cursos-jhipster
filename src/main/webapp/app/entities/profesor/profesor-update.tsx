@@ -51,7 +51,7 @@ export const ProfesorUpdate = () => {
     const entity = {
       ...profesorEntity,
       ...values,
-      user: userOS.find(it => it.id.toString() === values.user.toString()),
+      user: userOS.find(it => it.userName.toString() === values.user.toString()),
     };
 
     if (isNew) {
@@ -66,7 +66,7 @@ export const ProfesorUpdate = () => {
       ? {}
       : {
           ...profesorEntity,
-          user: profesorEntity?.user?.id,
+          user: profesorEntity?.user?.userName,
         };
 
   return (
@@ -95,13 +95,6 @@ export const ProfesorUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('evaluarCursosApp.profesor.profesorId')}
-                id="profesor-profesorId"
-                name="profesorId"
-                data-cy="profesorId"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('evaluarCursosApp.profesor.profesorName')}
                 id="profesor-profesorName"
                 name="profesorName"
@@ -118,8 +111,8 @@ export const ProfesorUpdate = () => {
                 <option value="" key="0" />
                 {userOS
                   ? userOS.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                      <option value={otherEntity.userName} key={otherEntity.userName}>
+                        {otherEntity.userName}
                       </option>
                     ))
                   : null}

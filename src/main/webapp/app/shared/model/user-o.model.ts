@@ -1,8 +1,7 @@
 import { IRole } from 'app/shared/model/role.model';
 
 export interface IUserO {
-  id?: number;
-  userName?: string | null;
+  userName?: string;
   password?: string | null;
   email?: string | null;
   role?: IRole | null;

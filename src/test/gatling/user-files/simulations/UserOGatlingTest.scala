@@ -71,7 +71,7 @@ class UserOGatlingTest extends Simulation {
             .post("/api/user-os")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
-                "userName":null
+                "userName":"SAMPLE_TEXT"
                 , "password":"SAMPLE_TEXT"
                 , "email":"SAMPLE_TEXT"
                 }""")).asJson

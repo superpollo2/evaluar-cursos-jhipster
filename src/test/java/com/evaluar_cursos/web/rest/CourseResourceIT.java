@@ -10,7 +10,6 @@ import com.evaluar_cursos.domain.Course;
 import com.evaluar_cursos.repository.CourseRepository;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class CourseResourceIT {
-
-    private static final UUID DEFAULT_COURSE_ID = UUID.randomUUID();
-    private static final UUID UPDATED_COURSE_ID = UUID.randomUUID();
 
     private static final String DEFAULT_COURSE_NAME = "AAAAAAAAAA";
     private static final String UPDATED_COURSE_NAME = "BBBBBBBBBB";
@@ -60,7 +56,7 @@ class CourseResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Course createEntity(EntityManager em) {
-        Course course = new Course().courseId(DEFAULT_COURSE_ID).courseName(DEFAULT_COURSE_NAME);
+        Course course = new Course().courseName(DEFAULT_COURSE_NAME);
         return course;
     }
 
@@ -71,7 +67,7 @@ class CourseResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Course createUpdatedEntity(EntityManager em) {
-        Course course = new Course().courseId(UPDATED_COURSE_ID).courseName(UPDATED_COURSE_NAME);
+        Course course = new Course().courseName(UPDATED_COURSE_NAME);
         return course;
     }
 
@@ -93,7 +89,6 @@ class CourseResourceIT {
         List<Course> courseList = courseRepository.findAll();
         assertThat(courseList).hasSize(databaseSizeBeforeCreate + 1);
         Course testCourse = courseList.get(courseList.size() - 1);
-        assertThat(testCourse.getCourseId()).isEqualTo(DEFAULT_COURSE_ID);
         assertThat(testCourse.getCourseName()).isEqualTo(DEFAULT_COURSE_NAME);
     }
 
@@ -127,7 +122,6 @@ class CourseResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(course.getId().intValue())))
-            .andExpect(jsonPath("$.[*].courseId").value(hasItem(DEFAULT_COURSE_ID.toString())))
             .andExpect(jsonPath("$.[*].courseName").value(hasItem(DEFAULT_COURSE_NAME)));
     }
 
@@ -143,7 +137,6 @@ class CourseResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(course.getId().intValue()))
-            .andExpect(jsonPath("$.courseId").value(DEFAULT_COURSE_ID.toString()))
             .andExpect(jsonPath("$.courseName").value(DEFAULT_COURSE_NAME));
     }
 
@@ -166,7 +159,7 @@ class CourseResourceIT {
         Course updatedCourse = courseRepository.findById(course.getId()).get();
         // Disconnect from session so that the updates on updatedCourse are not directly saved in db
         em.detach(updatedCourse);
-        updatedCourse.courseId(UPDATED_COURSE_ID).courseName(UPDATED_COURSE_NAME);
+        updatedCourse.courseName(UPDATED_COURSE_NAME);
 
         restCourseMockMvc
             .perform(
@@ -180,7 +173,6 @@ class CourseResourceIT {
         List<Course> courseList = courseRepository.findAll();
         assertThat(courseList).hasSize(databaseSizeBeforeUpdate);
         Course testCourse = courseList.get(courseList.size() - 1);
-        assertThat(testCourse.getCourseId()).isEqualTo(UPDATED_COURSE_ID);
         assertThat(testCourse.getCourseName()).isEqualTo(UPDATED_COURSE_NAME);
     }
 
@@ -264,7 +256,6 @@ class CourseResourceIT {
         List<Course> courseList = courseRepository.findAll();
         assertThat(courseList).hasSize(databaseSizeBeforeUpdate);
         Course testCourse = courseList.get(courseList.size() - 1);
-        assertThat(testCourse.getCourseId()).isEqualTo(DEFAULT_COURSE_ID);
         assertThat(testCourse.getCourseName()).isEqualTo(DEFAULT_COURSE_NAME);
     }
 
@@ -280,7 +271,7 @@ class CourseResourceIT {
         Course partialUpdatedCourse = new Course();
         partialUpdatedCourse.setId(course.getId());
 
-        partialUpdatedCourse.courseId(UPDATED_COURSE_ID).courseName(UPDATED_COURSE_NAME);
+        partialUpdatedCourse.courseName(UPDATED_COURSE_NAME);
 
         restCourseMockMvc
             .perform(
@@ -294,7 +285,6 @@ class CourseResourceIT {
         List<Course> courseList = courseRepository.findAll();
         assertThat(courseList).hasSize(databaseSizeBeforeUpdate);
         Course testCourse = courseList.get(courseList.size() - 1);
-        assertThat(testCourse.getCourseId()).isEqualTo(UPDATED_COURSE_ID);
         assertThat(testCourse.getCourseName()).isEqualTo(UPDATED_COURSE_NAME);
     }
 

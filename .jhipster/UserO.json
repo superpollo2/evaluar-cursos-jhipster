@@ -7,7 +7,11 @@
   "fields": [
     {
       "fieldName": "userName",
-      "fieldType": "UUID"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "options": {
+        "id": true
+      }
     },
     {
       "fieldName": "password",

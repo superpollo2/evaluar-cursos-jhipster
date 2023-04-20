@@ -14,9 +14,6 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="period_id" type="${uuidType}">
-                <constraints nullable="true" />
-            </column>
             <column name="init_period" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
@@ -46,7 +43,6 @@
                   tableName="academic_period"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="period_id" type="string"/>
             <column name="init_period" type="date"/>
             <column name="finish_period" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

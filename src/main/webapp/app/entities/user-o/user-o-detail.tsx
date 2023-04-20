@@ -27,12 +27,6 @@ export const UserODetail = () => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="id">
-              <Translate contentKey="global.field.id">ID</Translate>
-            </span>
-          </dt>
-          <dd>{userOEntity.id}</dd>
-          <dt>
             <span id="userName">
               <Translate contentKey="evaluarCursosApp.userO.userName">User Name</Translate>
             </span>
@@ -62,7 +56,7 @@ export const UserODetail = () => {
           </span>
         </Button>
         &nbsp;
-        <Button tag={Link} to={`/user-o/${userOEntity.id}/edit`} replace color="primary">
+        <Button tag={Link} to={`/user-o/${userOEntity.userName}/edit`} replace color="primary">
           <FontAwesomeIcon icon="pencil-alt" />{' '}
           <span className="d-none d-md-inline">
             <Translate contentKey="entity.action.edit">Edit</Translate>

@@ -33,12 +33,6 @@ export const ProfesorDetail = () => {
           </dt>
           <dd>{profesorEntity.id}</dd>
           <dt>
-            <span id="profesorId">
-              <Translate contentKey="evaluarCursosApp.profesor.profesorId">Profesor Id</Translate>
-            </span>
-          </dt>
-          <dd>{profesorEntity.profesorId}</dd>
-          <dt>
             <span id="profesorName">
               <Translate contentKey="evaluarCursosApp.profesor.profesorName">Profesor Name</Translate>
             </span>
@@ -47,7 +41,7 @@ export const ProfesorDetail = () => {
           <dt>
             <Translate contentKey="evaluarCursosApp.profesor.user">User</Translate>
           </dt>
-          <dd>{profesorEntity.user ? profesorEntity.user.id : ''}</dd>
+          <dd>{profesorEntity.user ? profesorEntity.user.userName : ''}</dd>
         </dl>
         <Button tag={Link} to="/profesor" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

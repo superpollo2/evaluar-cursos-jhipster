@@ -18,7 +18,6 @@
         "title": "Academic Program"
       },
       "id": "ID",
-      "programId": "Program Id",
       "programName": "Program Name",
       "student": "Student",
       "enrollCourse": "Enroll Course"

@@ -18,7 +18,6 @@
         "title": "Enroll Course"
       },
       "id": "ID",
-      "enrollId": "Enroll Id",
       "periodAcademic": "Period Academic",
       "isEvaluated": "Is Evaluated",
       "student": "Student",

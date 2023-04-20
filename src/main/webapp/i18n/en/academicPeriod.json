@@ -18,7 +18,6 @@
         "title": "Academic Period"
       },
       "id": "ID",
-      "periodId": "Period Id",
       "initPeriod": "Init Period",
       "finishPeriod": "Finish Period",
       "enrollCourse": "Enroll Course",

@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 
 /**
  * A Role.
@@ -25,10 +23,6 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Type(type = "uuid-char")
-    @Column(name = "role_id", length = 36)
-    private UUID roleId;
 
     @Column(name = "role_name")
     private String roleName;
@@ -51,19 +45,6 @@ public class Role implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public UUID getRoleId() {
-        return this.roleId;
-    }
-
-    public Role roleId(UUID roleId) {
-        this.setRoleId(roleId);
-        return this;
-    }
-
-    public void setRoleId(UUID roleId) {
-        this.roleId = roleId;
     }
 
     public String getRoleName() {
@@ -134,7 +115,6 @@ public class Role implements Serializable {
     public String toString() {
         return "Role{" +
             "id=" + getId() +
-            ", roleId='" + getRoleId() + "'" +
             ", roleName='" + getRoleName() + "'" +
             "}";
     }

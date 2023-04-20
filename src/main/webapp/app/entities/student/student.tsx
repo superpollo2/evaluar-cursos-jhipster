@@ -52,9 +52,6 @@ export const Student = () => {
                   <Translate contentKey="evaluarCursosApp.student.id">ID</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="evaluarCursosApp.student.studentId">Student Id</Translate>
-                </th>
-                <th>
                   <Translate contentKey="evaluarCursosApp.student.studentName">Student Name</Translate>
                 </th>
                 <th>
@@ -74,9 +71,8 @@ export const Student = () => {
                       {student.id}
                     </Button>
                   </td>
-                  <td>{student.studentId}</td>
                   <td>{student.studentName}</td>
-                  <td>{student.user ? <Link to={`/user-o/${student.user.id}`}>{student.user.id}</Link> : ''}</td>
+                  <td>{student.user ? <Link to={`/user-o/${student.user.userName}`}>{student.user.userName}</Link> : ''}</td>
                   <td>{student.program ? <Link to={`/academic-program/${student.program.id}`}>{student.program.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

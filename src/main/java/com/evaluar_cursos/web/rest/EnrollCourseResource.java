@@ -123,9 +123,6 @@ public class EnrollCourseResource {
         Optional<EnrollCourse> result = enrollCourseRepository
             .findById(enrollCourse.getId())
             .map(existingEnrollCourse -> {
-                if (enrollCourse.getEnrollId() != null) {
-                    existingEnrollCourse.setEnrollId(enrollCourse.getEnrollId());
-                }
                 if (enrollCourse.getPeriodAcademic() != null) {
                     existingEnrollCourse.setPeriodAcademic(enrollCourse.getPeriodAcademic());
                 }

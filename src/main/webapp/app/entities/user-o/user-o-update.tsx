@@ -86,21 +86,14 @@ export const UserOUpdate = () => {
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? (
                 <ValidatedField
-                  name="id"
+                  name="userName"
                   required
                   readOnly
-                  id="user-o-id"
-                  label={translate('global.field.id')}
+                  id="user-o-userName"
+                  label={translate('evaluarCursosApp.userO.userName')}
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField
-                label={translate('evaluarCursosApp.userO.userName')}
-                id="user-o-userName"
-                name="userName"
-                data-cy="userName"
-                type="text"
-              />
               <ValidatedField
                 label={translate('evaluarCursosApp.userO.password')}
                 id="user-o-password"

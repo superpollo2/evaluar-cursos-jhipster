@@ -88,13 +88,6 @@ export const AcademicProgramUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('evaluarCursosApp.academicProgram.programId')}
-                id="academic-program-programId"
-                name="programId"
-                data-cy="programId"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('evaluarCursosApp.academicProgram.programName')}
                 id="academic-program-programName"
                 name="programName"

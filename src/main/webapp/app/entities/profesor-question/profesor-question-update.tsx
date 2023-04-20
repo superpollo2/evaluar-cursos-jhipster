@@ -88,13 +88,6 @@ export const ProfesorQuestionUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('evaluarCursosApp.profesorQuestion.questionId')}
-                id="profesor-question-questionId"
-                name="questionId"
-                data-cy="questionId"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('evaluarCursosApp.profesorQuestion.profesorQuestion')}
                 id="profesor-question-profesorQuestion"
                 name="profesorQuestion"

@@ -2,11 +2,9 @@ package com.evaluar_cursos.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.UUID;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 
 /**
  * A EnrollCourse.
@@ -23,10 +21,6 @@ public class EnrollCourse implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Type(type = "uuid-char")
-    @Column(name = "enroll_id", length = 36)
-    private UUID enrollId;
 
     @Column(name = "period_academic")
     private String periodAcademic;
@@ -63,19 +57,6 @@ public class EnrollCourse implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public UUID getEnrollId() {
-        return this.enrollId;
-    }
-
-    public EnrollCourse enrollId(UUID enrollId) {
-        this.setEnrollId(enrollId);
-        return this;
-    }
-
-    public void setEnrollId(UUID enrollId) {
-        this.enrollId = enrollId;
     }
 
     public String getPeriodAcademic() {
@@ -180,7 +161,6 @@ public class EnrollCourse implements Serializable {
     public String toString() {
         return "EnrollCourse{" +
             "id=" + getId() +
-            ", enrollId='" + getEnrollId() + "'" +
             ", periodAcademic='" + getPeriodAcademic() + "'" +
             ", isEvaluated=" + getIsEvaluated() +
             "}";

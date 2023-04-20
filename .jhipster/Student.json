@@ -6,10 +6,6 @@
   "entityTableName": "student",
   "fields": [
     {
-      "fieldName": "studentId",
-      "fieldType": "UUID"
-    },
-    {
       "fieldName": "studentName",
       "fieldType": "String"
     }

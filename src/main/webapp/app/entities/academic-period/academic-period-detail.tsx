@@ -33,12 +33,6 @@ export const AcademicPeriodDetail = () => {
           </dt>
           <dd>{academicPeriodEntity.id}</dd>
           <dt>
-            <span id="periodId">
-              <Translate contentKey="evaluarCursosApp.academicPeriod.periodId">Period Id</Translate>
-            </span>
-          </dt>
-          <dd>{academicPeriodEntity.periodId}</dd>
-          <dt>
             <span id="initPeriod">
               <Translate contentKey="evaluarCursosApp.academicPeriod.initPeriod">Init Period</Translate>
             </span>

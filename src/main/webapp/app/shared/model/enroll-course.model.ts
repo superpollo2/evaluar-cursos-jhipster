@@ -5,7 +5,6 @@ import { IAcademicPeriod } from 'app/shared/model/academic-period.model';
 
 export interface IEnrollCourse {
   id?: number;
-  enrollId?: string | null;
   periodAcademic?: string | null;
   isEvaluated?: number | null;
   student?: IStudent | null;

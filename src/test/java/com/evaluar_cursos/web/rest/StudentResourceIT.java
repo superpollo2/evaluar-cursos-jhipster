@@ -10,7 +10,6 @@ import com.evaluar_cursos.domain.Student;
 import com.evaluar_cursos.repository.StudentRepository;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class StudentResourceIT {
-
-    private static final UUID DEFAULT_STUDENT_ID = UUID.randomUUID();
-    private static final UUID UPDATED_STUDENT_ID = UUID.randomUUID();
 
     private static final String DEFAULT_STUDENT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_STUDENT_NAME = "BBBBBBBBBB";
@@ -60,7 +56,7 @@ class StudentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Student createEntity(EntityManager em) {
-        Student student = new Student().studentId(DEFAULT_STUDENT_ID).studentName(DEFAULT_STUDENT_NAME);
+        Student student = new Student().studentName(DEFAULT_STUDENT_NAME);
         return student;
     }
 
@@ -71,7 +67,7 @@ class StudentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Student createUpdatedEntity(EntityManager em) {
-        Student student = new Student().studentId(UPDATED_STUDENT_ID).studentName(UPDATED_STUDENT_NAME);
+        Student student = new Student().studentName(UPDATED_STUDENT_NAME);
         return student;
     }
 
@@ -93,7 +89,6 @@ class StudentResourceIT {
         List<Student> studentList = studentRepository.findAll();
         assertThat(studentList).hasSize(databaseSizeBeforeCreate + 1);
         Student testStudent = studentList.get(studentList.size() - 1);
-        assertThat(testStudent.getStudentId()).isEqualTo(DEFAULT_STUDENT_ID);
         assertThat(testStudent.getStudentName()).isEqualTo(DEFAULT_STUDENT_NAME);
     }
 
@@ -127,7 +122,6 @@ class StudentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(student.getId().intValue())))
-            .andExpect(jsonPath("$.[*].studentId").value(hasItem(DEFAULT_STUDENT_ID.toString())))
             .andExpect(jsonPath("$.[*].studentName").value(hasItem(DEFAULT_STUDENT_NAME)));
     }
 
@@ -143,7 +137,6 @@ class StudentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(student.getId().intValue()))
-            .andExpect(jsonPath("$.studentId").value(DEFAULT_STUDENT_ID.toString()))
             .andExpect(jsonPath("$.studentName").value(DEFAULT_STUDENT_NAME));
     }
 
@@ -166,7 +159,7 @@ class StudentResourceIT {
         Student updatedStudent = studentRepository.findById(student.getId()).get();
         // Disconnect from session so that the updates on updatedStudent are not directly saved in db
         em.detach(updatedStudent);
-        updatedStudent.studentId(UPDATED_STUDENT_ID).studentName(UPDATED_STUDENT_NAME);
+        updatedStudent.studentName(UPDATED_STUDENT_NAME);
 
         restStudentMockMvc
             .perform(
@@ -180,7 +173,6 @@ class StudentResourceIT {
         List<Student> studentList = studentRepository.findAll();
         assertThat(studentList).hasSize(databaseSizeBeforeUpdate);
         Student testStudent = studentList.get(studentList.size() - 1);
-        assertThat(testStudent.getStudentId()).isEqualTo(UPDATED_STUDENT_ID);
         assertThat(testStudent.getStudentName()).isEqualTo(UPDATED_STUDENT_NAME);
     }
 
@@ -264,7 +256,6 @@ class StudentResourceIT {
         List<Student> studentList = studentRepository.findAll();
         assertThat(studentList).hasSize(databaseSizeBeforeUpdate);
         Student testStudent = studentList.get(studentList.size() - 1);
-        assertThat(testStudent.getStudentId()).isEqualTo(DEFAULT_STUDENT_ID);
         assertThat(testStudent.getStudentName()).isEqualTo(DEFAULT_STUDENT_NAME);
     }
 
@@ -280,7 +271,7 @@ class StudentResourceIT {
         Student partialUpdatedStudent = new Student();
         partialUpdatedStudent.setId(student.getId());
 
-        partialUpdatedStudent.studentId(UPDATED_STUDENT_ID).studentName(UPDATED_STUDENT_NAME);
+        partialUpdatedStudent.studentName(UPDATED_STUDENT_NAME);
 
         restStudentMockMvc
             .perform(
@@ -294,7 +285,6 @@ class StudentResourceIT {
         List<Student> studentList = studentRepository.findAll();
         assertThat(studentList).hasSize(databaseSizeBeforeUpdate);
         Student testStudent = studentList.get(studentList.size() - 1);
-        assertThat(testStudent.getStudentId()).isEqualTo(UPDATED_STUDENT_ID);
         assertThat(testStudent.getStudentName()).isEqualTo(UPDATED_STUDENT_NAME);
     }
 

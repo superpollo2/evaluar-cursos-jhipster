@@ -4,7 +4,6 @@ import { IAcademicProgram } from 'app/shared/model/academic-program.model';
 
 export interface IStudent {
   id?: number;
-  studentId?: string | null;
   studentName?: string | null;
   user?: IUserO | null;
   enrollCourses?: IEnrollCourse[] | null;

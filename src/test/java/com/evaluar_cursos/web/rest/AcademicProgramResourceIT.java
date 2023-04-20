@@ -10,7 +10,6 @@ import com.evaluar_cursos.domain.AcademicProgram;
 import com.evaluar_cursos.repository.AcademicProgramRepository;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class AcademicProgramResourceIT {
-
-    private static final UUID DEFAULT_PROGRAM_ID = UUID.randomUUID();
-    private static final UUID UPDATED_PROGRAM_ID = UUID.randomUUID();
 
     private static final String DEFAULT_PROGRAM_NAME = "AAAAAAAAAA";
     private static final String UPDATED_PROGRAM_NAME = "BBBBBBBBBB";
@@ -60,7 +56,7 @@ class AcademicProgramResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static AcademicProgram createEntity(EntityManager em) {
-        AcademicProgram academicProgram = new AcademicProgram().programId(DEFAULT_PROGRAM_ID).programName(DEFAULT_PROGRAM_NAME);
+        AcademicProgram academicProgram = new AcademicProgram().programName(DEFAULT_PROGRAM_NAME);
         return academicProgram;
     }
 
@@ -71,7 +67,7 @@ class AcademicProgramResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static AcademicProgram createUpdatedEntity(EntityManager em) {
-        AcademicProgram academicProgram = new AcademicProgram().programId(UPDATED_PROGRAM_ID).programName(UPDATED_PROGRAM_NAME);
+        AcademicProgram academicProgram = new AcademicProgram().programName(UPDATED_PROGRAM_NAME);
         return academicProgram;
     }
 
@@ -95,7 +91,6 @@ class AcademicProgramResourceIT {
         List<AcademicProgram> academicProgramList = academicProgramRepository.findAll();
         assertThat(academicProgramList).hasSize(databaseSizeBeforeCreate + 1);
         AcademicProgram testAcademicProgram = academicProgramList.get(academicProgramList.size() - 1);
-        assertThat(testAcademicProgram.getProgramId()).isEqualTo(DEFAULT_PROGRAM_ID);
         assertThat(testAcademicProgram.getProgramName()).isEqualTo(DEFAULT_PROGRAM_NAME);
     }
 
@@ -131,7 +126,6 @@ class AcademicProgramResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(academicProgram.getId().intValue())))
-            .andExpect(jsonPath("$.[*].programId").value(hasItem(DEFAULT_PROGRAM_ID.toString())))
             .andExpect(jsonPath("$.[*].programName").value(hasItem(DEFAULT_PROGRAM_NAME)));
     }
 
@@ -147,7 +141,6 @@ class AcademicProgramResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(academicProgram.getId().intValue()))
-            .andExpect(jsonPath("$.programId").value(DEFAULT_PROGRAM_ID.toString()))
             .andExpect(jsonPath("$.programName").value(DEFAULT_PROGRAM_NAME));
     }
 
@@ -170,7 +163,7 @@ class AcademicProgramResourceIT {
         AcademicProgram updatedAcademicProgram = academicProgramRepository.findById(academicProgram.getId()).get();
         // Disconnect from session so that the updates on updatedAcademicProgram are not directly saved in db
         em.detach(updatedAcademicProgram);
-        updatedAcademicProgram.programId(UPDATED_PROGRAM_ID).programName(UPDATED_PROGRAM_NAME);
+        updatedAcademicProgram.programName(UPDATED_PROGRAM_NAME);
 
         restAcademicProgramMockMvc
             .perform(
@@ -184,7 +177,6 @@ class AcademicProgramResourceIT {
         List<AcademicProgram> academicProgramList = academicProgramRepository.findAll();
         assertThat(academicProgramList).hasSize(databaseSizeBeforeUpdate);
         AcademicProgram testAcademicProgram = academicProgramList.get(academicProgramList.size() - 1);
-        assertThat(testAcademicProgram.getProgramId()).isEqualTo(UPDATED_PROGRAM_ID);
         assertThat(testAcademicProgram.getProgramName()).isEqualTo(UPDATED_PROGRAM_NAME);
     }
 
@@ -270,7 +262,6 @@ class AcademicProgramResourceIT {
         List<AcademicProgram> academicProgramList = academicProgramRepository.findAll();
         assertThat(academicProgramList).hasSize(databaseSizeBeforeUpdate);
         AcademicProgram testAcademicProgram = academicProgramList.get(academicProgramList.size() - 1);
-        assertThat(testAcademicProgram.getProgramId()).isEqualTo(DEFAULT_PROGRAM_ID);
         assertThat(testAcademicProgram.getProgramName()).isEqualTo(DEFAULT_PROGRAM_NAME);
     }
 
@@ -286,7 +277,7 @@ class AcademicProgramResourceIT {
         AcademicProgram partialUpdatedAcademicProgram = new AcademicProgram();
         partialUpdatedAcademicProgram.setId(academicProgram.getId());
 
-        partialUpdatedAcademicProgram.programId(UPDATED_PROGRAM_ID).programName(UPDATED_PROGRAM_NAME);
+        partialUpdatedAcademicProgram.programName(UPDATED_PROGRAM_NAME);
 
         restAcademicProgramMockMvc
             .perform(
@@ -300,7 +291,6 @@ class AcademicProgramResourceIT {
         List<AcademicProgram> academicProgramList = academicProgramRepository.findAll();
         assertThat(academicProgramList).hasSize(databaseSizeBeforeUpdate);
         AcademicProgram testAcademicProgram = academicProgramList.get(academicProgramList.size() - 1);
-        assertThat(testAcademicProgram.getProgramId()).isEqualTo(UPDATED_PROGRAM_ID);
         assertThat(testAcademicProgram.getProgramName()).isEqualTo(UPDATED_PROGRAM_NAME);
     }
 

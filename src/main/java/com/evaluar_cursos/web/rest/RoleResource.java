@@ -119,9 +119,6 @@ public class RoleResource {
         Optional<Role> result = roleRepository
             .findById(role.getId())
             .map(existingRole -> {
-                if (role.getRoleId() != null) {
-                    existingRole.setRoleId(role.getRoleId());
-                }
                 if (role.getRoleName() != null) {
                     existingRole.setRoleName(role.getRoleName());
                 }

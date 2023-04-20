@@ -18,7 +18,6 @@
         "title": "Course"
       },
       "id": "ID",
-      "courseId": "Course Id",
       "courseName": "Course Name",
       "totalScoreCourse": "Total Score Course"
     }

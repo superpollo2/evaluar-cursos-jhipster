@@ -6,10 +6,6 @@
   "entityTableName": "course",
   "fields": [
     {
-      "fieldName": "courseId",
-      "fieldType": "UUID"
-    },
-    {
       "fieldName": "courseName",
       "fieldType": "String"
     }

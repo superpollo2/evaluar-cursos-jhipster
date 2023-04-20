@@ -113,13 +113,6 @@ export const EnrollCourseUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('evaluarCursosApp.enrollCourse.enrollId')}
-                id="enroll-course-enrollId"
-                name="enrollId"
-                data-cy="enrollId"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('evaluarCursosApp.enrollCourse.periodAcademic')}
                 id="enroll-course-periodAcademic"
                 name="periodAcademic"

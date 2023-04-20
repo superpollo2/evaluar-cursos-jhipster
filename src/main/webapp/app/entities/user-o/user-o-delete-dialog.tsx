@@ -36,7 +36,7 @@ export const UserODeleteDialog = () => {
   }, [updateSuccess]);
 
   const confirmDelete = () => {
-    dispatch(deleteEntity(userOEntity.id));
+    dispatch(deleteEntity(userOEntity.userName));
   };
 
   return (
@@ -45,7 +45,7 @@ export const UserODeleteDialog = () => {
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
       <ModalBody id="evaluarCursosApp.userO.delete.question">
-        <Translate contentKey="evaluarCursosApp.userO.delete.question" interpolate={{ id: userOEntity.id }}>
+        <Translate contentKey="evaluarCursosApp.userO.delete.question" interpolate={{ id: userOEntity.userName }}>
           Are you sure you want to delete this UserO?
         </Translate>
       </ModalBody>

@@ -55,7 +55,7 @@ export const StudentUpdate = () => {
     const entity = {
       ...studentEntity,
       ...values,
-      user: userOS.find(it => it.id.toString() === values.user.toString()),
+      user: userOS.find(it => it.userName.toString() === values.user.toString()),
       program: academicPrograms.find(it => it.id.toString() === values.program.toString()),
     };
 
@@ -71,7 +71,7 @@ export const StudentUpdate = () => {
       ? {}
       : {
           ...studentEntity,
-          user: studentEntity?.user?.id,
+          user: studentEntity?.user?.userName,
           program: studentEntity?.program?.id,
         };
 
@@ -101,13 +101,6 @@ export const StudentUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('evaluarCursosApp.student.studentId')}
-                id="student-studentId"
-                name="studentId"
-                data-cy="studentId"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('evaluarCursosApp.student.studentName')}
                 id="student-studentName"
                 name="studentName"
@@ -118,8 +111,8 @@ export const StudentUpdate = () => {
                 <option value="" key="0" />
                 {userOS
                   ? userOS.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                      <option value={otherEntity.userName} key={otherEntity.userName}>
+                        {otherEntity.userName}
                       </option>
                     ))
                   : null}

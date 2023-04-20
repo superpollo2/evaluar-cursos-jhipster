@@ -6,10 +6,6 @@
   "entityTableName": "role",
   "fields": [
     {
-      "fieldName": "roleId",
-      "fieldType": "UUID"
-    },
-    {
       "fieldName": "roleName",
       "fieldType": "String"
     }

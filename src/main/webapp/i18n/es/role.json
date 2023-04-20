@@ -18,7 +18,6 @@
         "title": "Role"
       },
       "id": "ID",
-      "roleId": "Role Id",
       "roleName": "Role Name",
       "userO": "User O"
     }

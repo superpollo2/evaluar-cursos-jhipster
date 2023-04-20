@@ -88,13 +88,6 @@ export const RoleUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('evaluarCursosApp.role.roleId')}
-                id="role-roleId"
-                name="roleId"
-                data-cy="roleId"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('evaluarCursosApp.role.roleName')}
                 id="role-roleName"
                 name="roleName"

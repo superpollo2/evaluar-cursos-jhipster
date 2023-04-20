@@ -18,7 +18,6 @@
         "title": "Student"
       },
       "id": "ID",
-      "studentId": "Student Id",
       "studentName": "Student Name",
       "user": "User",
       "enrollCourse": "Enroll Course",

@@ -52,9 +52,6 @@ export const AcademicProgram = () => {
                   <Translate contentKey="evaluarCursosApp.academicProgram.id">ID</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="evaluarCursosApp.academicProgram.programId">Program Id</Translate>
-                </th>
-                <th>
                   <Translate contentKey="evaluarCursosApp.academicProgram.programName">Program Name</Translate>
                 </th>
                 <th />
@@ -68,7 +65,6 @@ export const AcademicProgram = () => {
                       {academicProgram.id}
                     </Button>
                   </td>
-                  <td>{academicProgram.programId}</td>
                   <td>{academicProgram.programName}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

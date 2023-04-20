@@ -71,8 +71,7 @@ class EnrollCourseGatlingTest extends Simulation {
             .post("/api/enroll-courses")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
-                "enrollId":null
-                , "periodAcademic":"SAMPLE_TEXT"
+                "periodAcademic":"SAMPLE_TEXT"
                 , "isEvaluated":"0"
                 }""")).asJson
             .check(status.is(201))

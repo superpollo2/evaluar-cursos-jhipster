@@ -33,12 +33,6 @@ export const RoleDetail = () => {
           </dt>
           <dd>{roleEntity.id}</dd>
           <dt>
-            <span id="roleId">
-              <Translate contentKey="evaluarCursosApp.role.roleId">Role Id</Translate>
-            </span>
-          </dt>
-          <dd>{roleEntity.roleId}</dd>
-          <dt>
             <span id="roleName">
               <Translate contentKey="evaluarCursosApp.role.roleName">Role Name</Translate>
             </span>

@@ -33,12 +33,6 @@ export const AcademicProgramDetail = () => {
           </dt>
           <dd>{academicProgramEntity.id}</dd>
           <dt>
-            <span id="programId">
-              <Translate contentKey="evaluarCursosApp.academicProgram.programId">Program Id</Translate>
-            </span>
-          </dt>
-          <dd>{academicProgramEntity.programId}</dd>
-          <dt>
             <span id="programName">
               <Translate contentKey="evaluarCursosApp.academicProgram.programName">Program Name</Translate>
             </span>

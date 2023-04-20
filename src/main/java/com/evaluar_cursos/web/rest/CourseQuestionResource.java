@@ -123,9 +123,6 @@ public class CourseQuestionResource {
         Optional<CourseQuestion> result = courseQuestionRepository
             .findById(courseQuestion.getId())
             .map(existingCourseQuestion -> {
-                if (courseQuestion.getQuestionId() != null) {
-                    existingCourseQuestion.setQuestionId(courseQuestion.getQuestionId());
-                }
                 if (courseQuestion.getCourseQuestion() != null) {
                     existingCourseQuestion.setCourseQuestion(courseQuestion.getCourseQuestion());
                 }

@@ -33,12 +33,6 @@ export const ProfesorQuestionDetail = () => {
           </dt>
           <dd>{profesorQuestionEntity.id}</dd>
           <dt>
-            <span id="questionId">
-              <Translate contentKey="evaluarCursosApp.profesorQuestion.questionId">Question Id</Translate>
-            </span>
-          </dt>
-          <dd>{profesorQuestionEntity.questionId}</dd>
-          <dt>
             <span id="profesorQuestion">
               <Translate contentKey="evaluarCursosApp.profesorQuestion.profesorQuestion">Profesor Question</Translate>
             </span>

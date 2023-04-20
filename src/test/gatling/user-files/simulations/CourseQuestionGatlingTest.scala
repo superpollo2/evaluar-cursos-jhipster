@@ -71,8 +71,7 @@ class CourseQuestionGatlingTest extends Simulation {
             .post("/api/course-questions")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
-                "questionId":null
-                , "courseQuestion":"SAMPLE_TEXT"
+                "courseQuestion":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_courseQuestion_url"))).exitHereIfFailed

@@ -123,9 +123,6 @@ public class ProfesorResource {
         Optional<Profesor> result = profesorRepository
             .findById(profesor.getId())
             .map(existingProfesor -> {
-                if (profesor.getProfesorId() != null) {
-                    existingProfesor.setProfesorId(profesor.getProfesorId());
-                }
                 if (profesor.getProfesorName() != null) {
                     existingProfesor.setProfesorName(profesor.getProfesorName());
                 }

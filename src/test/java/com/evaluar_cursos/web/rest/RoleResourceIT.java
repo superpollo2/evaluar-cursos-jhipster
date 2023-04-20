@@ -10,7 +10,6 @@ import com.evaluar_cursos.domain.Role;
 import com.evaluar_cursos.repository.RoleRepository;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class RoleResourceIT {
-
-    private static final UUID DEFAULT_ROLE_ID = UUID.randomUUID();
-    private static final UUID UPDATED_ROLE_ID = UUID.randomUUID();
 
     private static final String DEFAULT_ROLE_NAME = "AAAAAAAAAA";
     private static final String UPDATED_ROLE_NAME = "BBBBBBBBBB";
@@ -60,7 +56,7 @@ class RoleResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Role createEntity(EntityManager em) {
-        Role role = new Role().roleId(DEFAULT_ROLE_ID).roleName(DEFAULT_ROLE_NAME);
+        Role role = new Role().roleName(DEFAULT_ROLE_NAME);
         return role;
     }
 
@@ -71,7 +67,7 @@ class RoleResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Role createUpdatedEntity(EntityManager em) {
-        Role role = new Role().roleId(UPDATED_ROLE_ID).roleName(UPDATED_ROLE_NAME);
+        Role role = new Role().roleName(UPDATED_ROLE_NAME);
         return role;
     }
 
@@ -93,7 +89,6 @@ class RoleResourceIT {
         List<Role> roleList = roleRepository.findAll();
         assertThat(roleList).hasSize(databaseSizeBeforeCreate + 1);
         Role testRole = roleList.get(roleList.size() - 1);
-        assertThat(testRole.getRoleId()).isEqualTo(DEFAULT_ROLE_ID);
         assertThat(testRole.getRoleName()).isEqualTo(DEFAULT_ROLE_NAME);
     }
 
@@ -127,7 +122,6 @@ class RoleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(role.getId().intValue())))
-            .andExpect(jsonPath("$.[*].roleId").value(hasItem(DEFAULT_ROLE_ID.toString())))
             .andExpect(jsonPath("$.[*].roleName").value(hasItem(DEFAULT_ROLE_NAME)));
     }
 
@@ -143,7 +137,6 @@ class RoleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(role.getId().intValue()))
-            .andExpect(jsonPath("$.roleId").value(DEFAULT_ROLE_ID.toString()))
             .andExpect(jsonPath("$.roleName").value(DEFAULT_ROLE_NAME));
     }
 
@@ -166,7 +159,7 @@ class RoleResourceIT {
         Role updatedRole = roleRepository.findById(role.getId()).get();
         // Disconnect from session so that the updates on updatedRole are not directly saved in db
         em.detach(updatedRole);
-        updatedRole.roleId(UPDATED_ROLE_ID).roleName(UPDATED_ROLE_NAME);
+        updatedRole.roleName(UPDATED_ROLE_NAME);
 
         restRoleMockMvc
             .perform(
@@ -180,7 +173,6 @@ class RoleResourceIT {
         List<Role> roleList = roleRepository.findAll();
         assertThat(roleList).hasSize(databaseSizeBeforeUpdate);
         Role testRole = roleList.get(roleList.size() - 1);
-        assertThat(testRole.getRoleId()).isEqualTo(UPDATED_ROLE_ID);
         assertThat(testRole.getRoleName()).isEqualTo(UPDATED_ROLE_NAME);
     }
 
@@ -252,8 +244,6 @@ class RoleResourceIT {
         Role partialUpdatedRole = new Role();
         partialUpdatedRole.setId(role.getId());
 
-        partialUpdatedRole.roleName(UPDATED_ROLE_NAME);
-
         restRoleMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedRole.getId())
@@ -266,8 +256,7 @@ class RoleResourceIT {
         List<Role> roleList = roleRepository.findAll();
         assertThat(roleList).hasSize(databaseSizeBeforeUpdate);
         Role testRole = roleList.get(roleList.size() - 1);
-        assertThat(testRole.getRoleId()).isEqualTo(DEFAULT_ROLE_ID);
-        assertThat(testRole.getRoleName()).isEqualTo(UPDATED_ROLE_NAME);
+        assertThat(testRole.getRoleName()).isEqualTo(DEFAULT_ROLE_NAME);
     }
 
     @Test
@@ -282,7 +271,7 @@ class RoleResourceIT {
         Role partialUpdatedRole = new Role();
         partialUpdatedRole.setId(role.getId());
 
-        partialUpdatedRole.roleId(UPDATED_ROLE_ID).roleName(UPDATED_ROLE_NAME);
+        partialUpdatedRole.roleName(UPDATED_ROLE_NAME);
 
         restRoleMockMvc
             .perform(
@@ -296,7 +285,6 @@ class RoleResourceIT {
         List<Role> roleList = roleRepository.findAll();
         assertThat(roleList).hasSize(databaseSizeBeforeUpdate);
         Role testRole = roleList.get(roleList.size() - 1);
-        assertThat(testRole.getRoleId()).isEqualTo(UPDATED_ROLE_ID);
         assertThat(testRole.getRoleName()).isEqualTo(UPDATED_ROLE_NAME);
     }
 

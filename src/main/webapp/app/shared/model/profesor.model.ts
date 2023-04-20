@@ -4,7 +4,6 @@ import { ITotalScoreCourse } from 'app/shared/model/total-score-course.model';
 
 export interface IProfesor {
   id?: number;
-  profesorId?: string | null;
   profesorName?: string | null;
   user?: IUserO | null;
   enrollCourses?: IEnrollCourse[] | null;

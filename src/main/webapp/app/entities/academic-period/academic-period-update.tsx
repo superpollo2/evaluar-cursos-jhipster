@@ -96,13 +96,6 @@ export const AcademicPeriodUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('evaluarCursosApp.academicPeriod.periodId')}
-                id="academic-period-periodId"
-                name="periodId"
-                data-cy="periodId"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('evaluarCursosApp.academicPeriod.initPeriod')}
                 id="academic-period-initPeriod"
                 name="initPeriod"

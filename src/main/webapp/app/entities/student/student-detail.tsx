@@ -33,12 +33,6 @@ export const StudentDetail = () => {
           </dt>
           <dd>{studentEntity.id}</dd>
           <dt>
-            <span id="studentId">
-              <Translate contentKey="evaluarCursosApp.student.studentId">Student Id</Translate>
-            </span>
-          </dt>
-          <dd>{studentEntity.studentId}</dd>
-          <dt>
             <span id="studentName">
               <Translate contentKey="evaluarCursosApp.student.studentName">Student Name</Translate>
             </span>
@@ -47,7 +41,7 @@ export const StudentDetail = () => {
           <dt>
             <Translate contentKey="evaluarCursosApp.student.user">User</Translate>
           </dt>
-          <dd>{studentEntity.user ? studentEntity.user.id : ''}</dd>
+          <dd>{studentEntity.user ? studentEntity.user.userName : ''}</dd>
           <dt>
             <Translate contentKey="evaluarCursosApp.student.program">Program</Translate>
           </dt>

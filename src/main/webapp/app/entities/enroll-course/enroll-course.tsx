@@ -52,9 +52,6 @@ export const EnrollCourse = () => {
                   <Translate contentKey="evaluarCursosApp.enrollCourse.id">ID</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="evaluarCursosApp.enrollCourse.enrollId">Enroll Id</Translate>
-                </th>
-                <th>
                   <Translate contentKey="evaluarCursosApp.enrollCourse.periodAcademic">Period Academic</Translate>
                 </th>
                 <th>
@@ -83,7 +80,6 @@ export const EnrollCourse = () => {
                       {enrollCourse.id}
                     </Button>
                   </td>
-                  <td>{enrollCourse.enrollId}</td>
                   <td>{enrollCourse.periodAcademic}</td>
                   <td>{enrollCourse.isEvaluated}</td>
                   <td>{enrollCourse.student ? <Link to={`/student/${enrollCourse.student.id}`}>{enrollCourse.student.id}</Link> : ''}</td>

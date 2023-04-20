@@ -123,9 +123,6 @@ public class AcademicProgramResource {
         Optional<AcademicProgram> result = academicProgramRepository
             .findById(academicProgram.getId())
             .map(existingAcademicProgram -> {
-                if (academicProgram.getProgramId() != null) {
-                    existingAcademicProgram.setProgramId(academicProgram.getProgramId());
-                }
                 if (academicProgram.getProgramName() != null) {
                     existingAcademicProgram.setProgramName(academicProgram.getProgramName());
                 }

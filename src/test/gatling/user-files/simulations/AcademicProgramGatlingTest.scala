@@ -71,8 +71,7 @@ class AcademicProgramGatlingTest extends Simulation {
             .post("/api/academic-programs")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
-                "programId":null
-                , "programName":"SAMPLE_TEXT"
+                "programName":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_academicProgram_url"))).exitHereIfFailed

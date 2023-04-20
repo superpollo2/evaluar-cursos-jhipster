@@ -1,11 +1,9 @@
 package com.evaluar_cursos.domain;
 
 import java.io.Serializable;
-import java.util.UUID;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 
 /**
  * A ProfesorQuestion.
@@ -23,10 +21,6 @@ public class ProfesorQuestion implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Type(type = "uuid-char")
-    @Column(name = "question_id", length = 36)
-    private UUID questionId;
-
     @Column(name = "profesor_question")
     private String profesorQuestion;
 
@@ -43,19 +37,6 @@ public class ProfesorQuestion implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public UUID getQuestionId() {
-        return this.questionId;
-    }
-
-    public ProfesorQuestion questionId(UUID questionId) {
-        this.setQuestionId(questionId);
-        return this;
-    }
-
-    public void setQuestionId(UUID questionId) {
-        this.questionId = questionId;
     }
 
     public String getProfesorQuestion() {
@@ -95,7 +76,6 @@ public class ProfesorQuestion implements Serializable {
     public String toString() {
         return "ProfesorQuestion{" +
             "id=" + getId() +
-            ", questionId='" + getQuestionId() + "'" +
             ", profesorQuestion='" + getProfesorQuestion() + "'" +
             "}";
     }

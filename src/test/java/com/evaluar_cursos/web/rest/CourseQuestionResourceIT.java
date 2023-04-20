@@ -10,7 +10,6 @@ import com.evaluar_cursos.domain.CourseQuestion;
 import com.evaluar_cursos.repository.CourseQuestionRepository;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class CourseQuestionResourceIT {
-
-    private static final UUID DEFAULT_QUESTION_ID = UUID.randomUUID();
-    private static final UUID UPDATED_QUESTION_ID = UUID.randomUUID();
 
     private static final String DEFAULT_COURSE_QUESTION = "AAAAAAAAAA";
     private static final String UPDATED_COURSE_QUESTION = "BBBBBBBBBB";
@@ -60,7 +56,7 @@ class CourseQuestionResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static CourseQuestion createEntity(EntityManager em) {
-        CourseQuestion courseQuestion = new CourseQuestion().questionId(DEFAULT_QUESTION_ID).courseQuestion(DEFAULT_COURSE_QUESTION);
+        CourseQuestion courseQuestion = new CourseQuestion().courseQuestion(DEFAULT_COURSE_QUESTION);
         return courseQuestion;
     }
 
@@ -71,7 +67,7 @@ class CourseQuestionResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static CourseQuestion createUpdatedEntity(EntityManager em) {
-        CourseQuestion courseQuestion = new CourseQuestion().questionId(UPDATED_QUESTION_ID).courseQuestion(UPDATED_COURSE_QUESTION);
+        CourseQuestion courseQuestion = new CourseQuestion().courseQuestion(UPDATED_COURSE_QUESTION);
         return courseQuestion;
     }
 
@@ -95,7 +91,6 @@ class CourseQuestionResourceIT {
         List<CourseQuestion> courseQuestionList = courseQuestionRepository.findAll();
         assertThat(courseQuestionList).hasSize(databaseSizeBeforeCreate + 1);
         CourseQuestion testCourseQuestion = courseQuestionList.get(courseQuestionList.size() - 1);
-        assertThat(testCourseQuestion.getQuestionId()).isEqualTo(DEFAULT_QUESTION_ID);
         assertThat(testCourseQuestion.getCourseQuestion()).isEqualTo(DEFAULT_COURSE_QUESTION);
     }
 
@@ -131,7 +126,6 @@ class CourseQuestionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(courseQuestion.getId().intValue())))
-            .andExpect(jsonPath("$.[*].questionId").value(hasItem(DEFAULT_QUESTION_ID.toString())))
             .andExpect(jsonPath("$.[*].courseQuestion").value(hasItem(DEFAULT_COURSE_QUESTION)));
     }
 
@@ -147,7 +141,6 @@ class CourseQuestionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(courseQuestion.getId().intValue()))
-            .andExpect(jsonPath("$.questionId").value(DEFAULT_QUESTION_ID.toString()))
             .andExpect(jsonPath("$.courseQuestion").value(DEFAULT_COURSE_QUESTION));
     }
 
@@ -170,7 +163,7 @@ class CourseQuestionResourceIT {
         CourseQuestion updatedCourseQuestion = courseQuestionRepository.findById(courseQuestion.getId()).get();
         // Disconnect from session so that the updates on updatedCourseQuestion are not directly saved in db
         em.detach(updatedCourseQuestion);
-        updatedCourseQuestion.questionId(UPDATED_QUESTION_ID).courseQuestion(UPDATED_COURSE_QUESTION);
+        updatedCourseQuestion.courseQuestion(UPDATED_COURSE_QUESTION);
 
         restCourseQuestionMockMvc
             .perform(
@@ -184,7 +177,6 @@ class CourseQuestionResourceIT {
         List<CourseQuestion> courseQuestionList = courseQuestionRepository.findAll();
         assertThat(courseQuestionList).hasSize(databaseSizeBeforeUpdate);
         CourseQuestion testCourseQuestion = courseQuestionList.get(courseQuestionList.size() - 1);
-        assertThat(testCourseQuestion.getQuestionId()).isEqualTo(UPDATED_QUESTION_ID);
         assertThat(testCourseQuestion.getCourseQuestion()).isEqualTo(UPDATED_COURSE_QUESTION);
     }
 
@@ -268,7 +260,6 @@ class CourseQuestionResourceIT {
         List<CourseQuestion> courseQuestionList = courseQuestionRepository.findAll();
         assertThat(courseQuestionList).hasSize(databaseSizeBeforeUpdate);
         CourseQuestion testCourseQuestion = courseQuestionList.get(courseQuestionList.size() - 1);
-        assertThat(testCourseQuestion.getQuestionId()).isEqualTo(DEFAULT_QUESTION_ID);
         assertThat(testCourseQuestion.getCourseQuestion()).isEqualTo(DEFAULT_COURSE_QUESTION);
     }
 
@@ -284,7 +275,7 @@ class CourseQuestionResourceIT {
         CourseQuestion partialUpdatedCourseQuestion = new CourseQuestion();
         partialUpdatedCourseQuestion.setId(courseQuestion.getId());
 
-        partialUpdatedCourseQuestion.questionId(UPDATED_QUESTION_ID).courseQuestion(UPDATED_COURSE_QUESTION);
+        partialUpdatedCourseQuestion.courseQuestion(UPDATED_COURSE_QUESTION);
 
         restCourseQuestionMockMvc
             .perform(
@@ -298,7 +289,6 @@ class CourseQuestionResourceIT {
         List<CourseQuestion> courseQuestionList = courseQuestionRepository.findAll();
         assertThat(courseQuestionList).hasSize(databaseSizeBeforeUpdate);
         CourseQuestion testCourseQuestion = courseQuestionList.get(courseQuestionList.size() - 1);
-        assertThat(testCourseQuestion.getQuestionId()).isEqualTo(UPDATED_QUESTION_ID);
         assertThat(testCourseQuestion.getCourseQuestion()).isEqualTo(UPDATED_COURSE_QUESTION);
     }
 

@@ -121,9 +121,6 @@ public class StudentResource {
         Optional<Student> result = studentRepository
             .findById(student.getId())
             .map(existingStudent -> {
-                if (student.getStudentId() != null) {
-                    existingStudent.setStudentId(student.getStudentId());
-                }
                 if (student.getStudentName() != null) {
                     existingStudent.setStudentName(student.getStudentName());
                 }

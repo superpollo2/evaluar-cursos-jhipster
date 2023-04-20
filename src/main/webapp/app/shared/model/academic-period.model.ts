@@ -5,7 +5,6 @@ import { ITotalScoreProfesor } from 'app/shared/model/total-score-profesor.model
 
 export interface IAcademicPeriod {
   id?: number;
-  periodId?: string | null;
   initPeriod?: string | null;
   finishPeriod?: string | null;
   enrollCourses?: IEnrollCourse[] | null;

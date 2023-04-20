@@ -5,11 +5,9 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 
 /**
  * A AcademicPeriod.
@@ -26,10 +24,6 @@ public class AcademicPeriod implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Type(type = "uuid-char")
-    @Column(name = "period_id", length = 36)
-    private UUID periodId;
 
     @Column(name = "init_period")
     private Instant initPeriod;
@@ -65,19 +59,6 @@ public class AcademicPeriod implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public UUID getPeriodId() {
-        return this.periodId;
-    }
-
-    public AcademicPeriod periodId(UUID periodId) {
-        this.setPeriodId(periodId);
-        return this;
-    }
-
-    public void setPeriodId(UUID periodId) {
-        this.periodId = periodId;
     }
 
     public Instant getInitPeriod() {
@@ -223,7 +204,6 @@ public class AcademicPeriod implements Serializable {
     public String toString() {
         return "AcademicPeriod{" +
             "id=" + getId() +
-            ", periodId='" + getPeriodId() + "'" +
             ", initPeriod='" + getInitPeriod() + "'" +
             ", finishPeriod='" + getFinishPeriod() + "'" +
             "}";

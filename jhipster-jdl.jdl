@@ -1,57 +1,48 @@
 
 
 entity UserO{
-	userName UUID
+	@Id userName String required
 	password String
 	email String unique
 	
 }
 
 entity Student {
-	studentId UUID
 	studentName String
 }
 
 entity AcademicProgram{
-	programId  UUID
     programName String
 }
 
 entity Profesor  {
-	profesorId  UUID
     profesorName String
 }
 
 entity EnrollCourse{
-	enrollId UUID
     periodAcademic String
     isEvaluated Integer
     
 }
 
 entity Role {
-	roleId UUID
     roleName String 
 }
 
 entity Course{
-	courseId UUID
     courseName String 
 }
 
 entity AcademicPeriod{
-	periodId UUID
     initPeriod Instant
     finishPeriod Instant
 }
 
 entity CourseQuestion {
-	questionId UUID
     courseQuestion String
 }
 
 entity ProfesorQuestion {
-	questionId UUID
     profesorQuestion String
 }
 

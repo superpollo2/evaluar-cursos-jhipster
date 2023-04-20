@@ -49,9 +49,6 @@ export const UserO = () => {
             <thead>
               <tr>
                 <th>
-                  <Translate contentKey="evaluarCursosApp.userO.id">ID</Translate>
-                </th>
-                <th>
                   <Translate contentKey="evaluarCursosApp.userO.userName">User Name</Translate>
                 </th>
                 <th>
@@ -70,29 +67,28 @@ export const UserO = () => {
               {userOList.map((userO, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
                   <td>
-                    <Button tag={Link} to={`/user-o/${userO.id}`} color="link" size="sm">
-                      {userO.id}
+                    <Button tag={Link} to={`/user-o/${userO.userName}`} color="link" size="sm">
+                      {userO.userName}
                     </Button>
                   </td>
-                  <td>{userO.userName}</td>
                   <td>{userO.password}</td>
                   <td>{userO.email}</td>
                   <td>{userO.role ? <Link to={`/role/${userO.role.id}`}>{userO.role.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`/user-o/${userO.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+                      <Button tag={Link} to={`/user-o/${userO.userName}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.view">View</Translate>
                         </span>
                       </Button>
-                      <Button tag={Link} to={`/user-o/${userO.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
+                      <Button tag={Link} to={`/user-o/${userO.userName}/edit`} color="primary" size="sm" data-cy="entityEditButton">
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.edit">Edit</Translate>
                         </span>
                       </Button>
-                      <Button tag={Link} to={`/user-o/${userO.id}/delete`} color="danger" size="sm" data-cy="entityDeleteButton">
+                      <Button tag={Link} to={`/user-o/${userO.userName}/delete`} color="danger" size="sm" data-cy="entityDeleteButton">
                         <FontAwesomeIcon icon="trash" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.delete">Delete</Translate>

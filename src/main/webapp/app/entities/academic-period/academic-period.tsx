@@ -52,9 +52,6 @@ export const AcademicPeriod = () => {
                   <Translate contentKey="evaluarCursosApp.academicPeriod.id">ID</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="evaluarCursosApp.academicPeriod.periodId">Period Id</Translate>
-                </th>
-                <th>
                   <Translate contentKey="evaluarCursosApp.academicPeriod.initPeriod">Init Period</Translate>
                 </th>
                 <th>
@@ -71,7 +68,6 @@ export const AcademicPeriod = () => {
                       {academicPeriod.id}
                     </Button>
                   </td>
-                  <td>{academicPeriod.periodId}</td>
                   <td>
                     {academicPeriod.initPeriod ? (
                       <TextFormat type="date" value={academicPeriod.initPeriod} format={APP_DATE_FORMAT} />

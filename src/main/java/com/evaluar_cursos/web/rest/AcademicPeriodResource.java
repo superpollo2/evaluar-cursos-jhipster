@@ -123,9 +123,6 @@ public class AcademicPeriodResource {
         Optional<AcademicPeriod> result = academicPeriodRepository
             .findById(academicPeriod.getId())
             .map(existingAcademicPeriod -> {
-                if (academicPeriod.getPeriodId() != null) {
-                    existingAcademicPeriod.setPeriodId(academicPeriod.getPeriodId());
-                }
                 if (academicPeriod.getInitPeriod() != null) {
                     existingAcademicPeriod.setInitPeriod(academicPeriod.getInitPeriod());
                 }

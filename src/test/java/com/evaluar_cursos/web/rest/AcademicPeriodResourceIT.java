@@ -12,7 +12,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,9 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class AcademicPeriodResourceIT {
-
-    private static final UUID DEFAULT_PERIOD_ID = UUID.randomUUID();
-    private static final UUID UPDATED_PERIOD_ID = UUID.randomUUID();
 
     private static final Instant DEFAULT_INIT_PERIOD = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_INIT_PERIOD = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -65,10 +61,7 @@ class AcademicPeriodResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static AcademicPeriod createEntity(EntityManager em) {
-        AcademicPeriod academicPeriod = new AcademicPeriod()
-            .periodId(DEFAULT_PERIOD_ID)
-            .initPeriod(DEFAULT_INIT_PERIOD)
-            .finishPeriod(DEFAULT_FINISH_PERIOD);
+        AcademicPeriod academicPeriod = new AcademicPeriod().initPeriod(DEFAULT_INIT_PERIOD).finishPeriod(DEFAULT_FINISH_PERIOD);
         return academicPeriod;
     }
 
@@ -79,10 +72,7 @@ class AcademicPeriodResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static AcademicPeriod createUpdatedEntity(EntityManager em) {
-        AcademicPeriod academicPeriod = new AcademicPeriod()
-            .periodId(UPDATED_PERIOD_ID)
-            .initPeriod(UPDATED_INIT_PERIOD)
-            .finishPeriod(UPDATED_FINISH_PERIOD);
+        AcademicPeriod academicPeriod = new AcademicPeriod().initPeriod(UPDATED_INIT_PERIOD).finishPeriod(UPDATED_FINISH_PERIOD);
         return academicPeriod;
     }
 
@@ -106,7 +96,6 @@ class AcademicPeriodResourceIT {
         List<AcademicPeriod> academicPeriodList = academicPeriodRepository.findAll();
         assertThat(academicPeriodList).hasSize(databaseSizeBeforeCreate + 1);
         AcademicPeriod testAcademicPeriod = academicPeriodList.get(academicPeriodList.size() - 1);
-        assertThat(testAcademicPeriod.getPeriodId()).isEqualTo(DEFAULT_PERIOD_ID);
         assertThat(testAcademicPeriod.getInitPeriod()).isEqualTo(DEFAULT_INIT_PERIOD);
         assertThat(testAcademicPeriod.getFinishPeriod()).isEqualTo(DEFAULT_FINISH_PERIOD);
     }
@@ -143,7 +132,6 @@ class AcademicPeriodResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(academicPeriod.getId().intValue())))
-            .andExpect(jsonPath("$.[*].periodId").value(hasItem(DEFAULT_PERIOD_ID.toString())))
             .andExpect(jsonPath("$.[*].initPeriod").value(hasItem(DEFAULT_INIT_PERIOD.toString())))
             .andExpect(jsonPath("$.[*].finishPeriod").value(hasItem(DEFAULT_FINISH_PERIOD.toString())));
     }
@@ -160,7 +148,6 @@ class AcademicPeriodResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(academicPeriod.getId().intValue()))
-            .andExpect(jsonPath("$.periodId").value(DEFAULT_PERIOD_ID.toString()))
             .andExpect(jsonPath("$.initPeriod").value(DEFAULT_INIT_PERIOD.toString()))
             .andExpect(jsonPath("$.finishPeriod").value(DEFAULT_FINISH_PERIOD.toString()));
     }
@@ -184,7 +171,7 @@ class AcademicPeriodResourceIT {
         AcademicPeriod updatedAcademicPeriod = academicPeriodRepository.findById(academicPeriod.getId()).get();
         // Disconnect from session so that the updates on updatedAcademicPeriod are not directly saved in db
         em.detach(updatedAcademicPeriod);
-        updatedAcademicPeriod.periodId(UPDATED_PERIOD_ID).initPeriod(UPDATED_INIT_PERIOD).finishPeriod(UPDATED_FINISH_PERIOD);
+        updatedAcademicPeriod.initPeriod(UPDATED_INIT_PERIOD).finishPeriod(UPDATED_FINISH_PERIOD);
 
         restAcademicPeriodMockMvc
             .perform(
@@ -198,7 +185,6 @@ class AcademicPeriodResourceIT {
         List<AcademicPeriod> academicPeriodList = academicPeriodRepository.findAll();
         assertThat(academicPeriodList).hasSize(databaseSizeBeforeUpdate);
         AcademicPeriod testAcademicPeriod = academicPeriodList.get(academicPeriodList.size() - 1);
-        assertThat(testAcademicPeriod.getPeriodId()).isEqualTo(UPDATED_PERIOD_ID);
         assertThat(testAcademicPeriod.getInitPeriod()).isEqualTo(UPDATED_INIT_PERIOD);
         assertThat(testAcademicPeriod.getFinishPeriod()).isEqualTo(UPDATED_FINISH_PERIOD);
     }
@@ -271,7 +257,7 @@ class AcademicPeriodResourceIT {
         AcademicPeriod partialUpdatedAcademicPeriod = new AcademicPeriod();
         partialUpdatedAcademicPeriod.setId(academicPeriod.getId());
 
-        partialUpdatedAcademicPeriod.periodId(UPDATED_PERIOD_ID).initPeriod(UPDATED_INIT_PERIOD);
+        partialUpdatedAcademicPeriod.initPeriod(UPDATED_INIT_PERIOD).finishPeriod(UPDATED_FINISH_PERIOD);
 
         restAcademicPeriodMockMvc
             .perform(
@@ -285,9 +271,8 @@ class AcademicPeriodResourceIT {
         List<AcademicPeriod> academicPeriodList = academicPeriodRepository.findAll();
         assertThat(academicPeriodList).hasSize(databaseSizeBeforeUpdate);
         AcademicPeriod testAcademicPeriod = academicPeriodList.get(academicPeriodList.size() - 1);
-        assertThat(testAcademicPeriod.getPeriodId()).isEqualTo(UPDATED_PERIOD_ID);
         assertThat(testAcademicPeriod.getInitPeriod()).isEqualTo(UPDATED_INIT_PERIOD);
-        assertThat(testAcademicPeriod.getFinishPeriod()).isEqualTo(DEFAULT_FINISH_PERIOD);
+        assertThat(testAcademicPeriod.getFinishPeriod()).isEqualTo(UPDATED_FINISH_PERIOD);
     }
 
     @Test
@@ -302,7 +287,7 @@ class AcademicPeriodResourceIT {
         AcademicPeriod partialUpdatedAcademicPeriod = new AcademicPeriod();
         partialUpdatedAcademicPeriod.setId(academicPeriod.getId());
 
-        partialUpdatedAcademicPeriod.periodId(UPDATED_PERIOD_ID).initPeriod(UPDATED_INIT_PERIOD).finishPeriod(UPDATED_FINISH_PERIOD);
+        partialUpdatedAcademicPeriod.initPeriod(UPDATED_INIT_PERIOD).finishPeriod(UPDATED_FINISH_PERIOD);
 
         restAcademicPeriodMockMvc
             .perform(
@@ -316,7 +301,6 @@ class AcademicPeriodResourceIT {
         List<AcademicPeriod> academicPeriodList = academicPeriodRepository.findAll();
         assertThat(academicPeriodList).hasSize(databaseSizeBeforeUpdate);
         AcademicPeriod testAcademicPeriod = academicPeriodList.get(academicPeriodList.size() - 1);
-        assertThat(testAcademicPeriod.getPeriodId()).isEqualTo(UPDATED_PERIOD_ID);
         assertThat(testAcademicPeriod.getInitPeriod()).isEqualTo(UPDATED_INIT_PERIOD);
         assertThat(testAcademicPeriod.getFinishPeriod()).isEqualTo(UPDATED_FINISH_PERIOD);
     }

@@ -71,8 +71,7 @@ class RoleGatlingTest extends Simulation {
             .post("/api/roles")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
-                "roleId":null
-                , "roleName":"SAMPLE_TEXT"
+                "roleName":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_role_url"))).exitHereIfFailed

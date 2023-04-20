@@ -9,9 +9,7 @@ import com.evaluar_cursos.IntegrationTest;
 import com.evaluar_cursos.domain.UserO;
 import com.evaluar_cursos.repository.UserORepository;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,9 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class UserOResourceIT {
 
-    private static final UUID DEFAULT_USER_NAME = UUID.randomUUID();
-    private static final UUID UPDATED_USER_NAME = UUID.randomUUID();
-
     private static final String DEFAULT_PASSWORD = "AAAAAAAAAA";
     private static final String UPDATED_PASSWORD = "BBBBBBBBBB";
 
@@ -40,10 +35,7 @@ class UserOResourceIT {
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/user-os";
-    private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
+    private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{userName}";
 
     @Autowired
     private UserORepository userORepository;
@@ -63,7 +55,7 @@ class UserOResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static UserO createEntity(EntityManager em) {
-        UserO userO = new UserO().userName(DEFAULT_USER_NAME).password(DEFAULT_PASSWORD).email(DEFAULT_EMAIL);
+        UserO userO = new UserO().password(DEFAULT_PASSWORD).email(DEFAULT_EMAIL);
         return userO;
     }
 
@@ -74,7 +66,7 @@ class UserOResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static UserO createUpdatedEntity(EntityManager em) {
-        UserO userO = new UserO().userName(UPDATED_USER_NAME).password(UPDATED_PASSWORD).email(UPDATED_EMAIL);
+        UserO userO = new UserO().password(UPDATED_PASSWORD).email(UPDATED_EMAIL);
         return userO;
     }
 
@@ -96,7 +88,6 @@ class UserOResourceIT {
         List<UserO> userOList = userORepository.findAll();
         assertThat(userOList).hasSize(databaseSizeBeforeCreate + 1);
         UserO testUserO = userOList.get(userOList.size() - 1);
-        assertThat(testUserO.getUserName()).isEqualTo(DEFAULT_USER_NAME);
         assertThat(testUserO.getPassword()).isEqualTo(DEFAULT_PASSWORD);
         assertThat(testUserO.getEmail()).isEqualTo(DEFAULT_EMAIL);
     }
@@ -105,7 +96,7 @@ class UserOResourceIT {
     @Transactional
     void createUserOWithExistingId() throws Exception {
         // Create the UserO with an existing ID
-        userO.setId(1L);
+        userO.setUserName("existing_id");
 
         int databaseSizeBeforeCreate = userORepository.findAll().size();
 
@@ -123,15 +114,15 @@ class UserOResourceIT {
     @Transactional
     void getAllUserOS() throws Exception {
         // Initialize the database
+        userO.setUserName(UUID.randomUUID().toString());
         userORepository.saveAndFlush(userO);
 
         // Get all the userOList
         restUserOMockMvc
-            .perform(get(ENTITY_API_URL + "?sort=id,desc"))
+            .perform(get(ENTITY_API_URL + "?sort=userName,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(userO.getId().intValue())))
-            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
+            .andExpect(jsonPath("$.[*].userName").value(hasItem(userO.getUserName())))
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)));
     }
@@ -140,15 +131,15 @@ class UserOResourceIT {
     @Transactional
     void getUserO() throws Exception {
         // Initialize the database
+        userO.setUserName(UUID.randomUUID().toString());
         userORepository.saveAndFlush(userO);
 
         // Get the userO
         restUserOMockMvc
-            .perform(get(ENTITY_API_URL_ID, userO.getId()))
+            .perform(get(ENTITY_API_URL_ID, userO.getUserName()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(userO.getId().intValue()))
-            .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
+            .andExpect(jsonPath("$.userName").value(userO.getUserName()))
             .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL));
     }
@@ -164,19 +155,20 @@ class UserOResourceIT {
     @Transactional
     void putExistingUserO() throws Exception {
         // Initialize the database
+        userO.setUserName(UUID.randomUUID().toString());
         userORepository.saveAndFlush(userO);
 
         int databaseSizeBeforeUpdate = userORepository.findAll().size();
 
         // Update the userO
-        UserO updatedUserO = userORepository.findById(userO.getId()).get();
+        UserO updatedUserO = userORepository.findById(userO.getUserName()).get();
         // Disconnect from session so that the updates on updatedUserO are not directly saved in db
         em.detach(updatedUserO);
-        updatedUserO.userName(UPDATED_USER_NAME).password(UPDATED_PASSWORD).email(UPDATED_EMAIL);
+        updatedUserO.password(UPDATED_PASSWORD).email(UPDATED_EMAIL);
 
         restUserOMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedUserO.getId())
+                put(ENTITY_API_URL_ID, updatedUserO.getUserName())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(updatedUserO))
             )
@@ -186,7 +178,6 @@ class UserOResourceIT {
         List<UserO> userOList = userORepository.findAll();
         assertThat(userOList).hasSize(databaseSizeBeforeUpdate);
         UserO testUserO = userOList.get(userOList.size() - 1);
-        assertThat(testUserO.getUserName()).isEqualTo(UPDATED_USER_NAME);
         assertThat(testUserO.getPassword()).isEqualTo(UPDATED_PASSWORD);
         assertThat(testUserO.getEmail()).isEqualTo(UPDATED_EMAIL);
     }
@@ -195,12 +186,12 @@ class UserOResourceIT {
     @Transactional
     void putNonExistingUserO() throws Exception {
         int databaseSizeBeforeUpdate = userORepository.findAll().size();
-        userO.setId(count.incrementAndGet());
+        userO.setUserName(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restUserOMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, userO.getId())
+                put(ENTITY_API_URL_ID, userO.getUserName())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(userO))
             )
@@ -215,12 +206,12 @@ class UserOResourceIT {
     @Transactional
     void putWithIdMismatchUserO() throws Exception {
         int databaseSizeBeforeUpdate = userORepository.findAll().size();
-        userO.setId(count.incrementAndGet());
+        userO.setUserName(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUserOMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, count.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(userO))
             )
@@ -235,7 +226,7 @@ class UserOResourceIT {
     @Transactional
     void putWithMissingIdPathParamUserO() throws Exception {
         int databaseSizeBeforeUpdate = userORepository.findAll().size();
-        userO.setId(count.incrementAndGet());
+        userO.setUserName(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUserOMockMvc
@@ -251,19 +242,20 @@ class UserOResourceIT {
     @Transactional
     void partialUpdateUserOWithPatch() throws Exception {
         // Initialize the database
+        userO.setUserName(UUID.randomUUID().toString());
         userORepository.saveAndFlush(userO);
 
         int databaseSizeBeforeUpdate = userORepository.findAll().size();
 
         // Update the userO using partial update
         UserO partialUpdatedUserO = new UserO();
-        partialUpdatedUserO.setId(userO.getId());
+        partialUpdatedUserO.setUserName(userO.getUserName());
 
-        partialUpdatedUserO.userName(UPDATED_USER_NAME).email(UPDATED_EMAIL);
+        partialUpdatedUserO.password(UPDATED_PASSWORD);
 
         restUserOMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, partialUpdatedUserO.getId())
+                patch(ENTITY_API_URL_ID, partialUpdatedUserO.getUserName())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedUserO))
             )
@@ -273,28 +265,28 @@ class UserOResourceIT {
         List<UserO> userOList = userORepository.findAll();
         assertThat(userOList).hasSize(databaseSizeBeforeUpdate);
         UserO testUserO = userOList.get(userOList.size() - 1);
-        assertThat(testUserO.getUserName()).isEqualTo(UPDATED_USER_NAME);
-        assertThat(testUserO.getPassword()).isEqualTo(DEFAULT_PASSWORD);
-        assertThat(testUserO.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testUserO.getPassword()).isEqualTo(UPDATED_PASSWORD);
+        assertThat(testUserO.getEmail()).isEqualTo(DEFAULT_EMAIL);
     }
 
     @Test
     @Transactional
     void fullUpdateUserOWithPatch() throws Exception {
         // Initialize the database
+        userO.setUserName(UUID.randomUUID().toString());
         userORepository.saveAndFlush(userO);
 
         int databaseSizeBeforeUpdate = userORepository.findAll().size();
 
         // Update the userO using partial update
         UserO partialUpdatedUserO = new UserO();
-        partialUpdatedUserO.setId(userO.getId());
+        partialUpdatedUserO.setUserName(userO.getUserName());
 
-        partialUpdatedUserO.userName(UPDATED_USER_NAME).password(UPDATED_PASSWORD).email(UPDATED_EMAIL);
+        partialUpdatedUserO.password(UPDATED_PASSWORD).email(UPDATED_EMAIL);
 
         restUserOMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, partialUpdatedUserO.getId())
+                patch(ENTITY_API_URL_ID, partialUpdatedUserO.getUserName())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedUserO))
             )
@@ -304,7 +296,6 @@ class UserOResourceIT {
         List<UserO> userOList = userORepository.findAll();
         assertThat(userOList).hasSize(databaseSizeBeforeUpdate);
         UserO testUserO = userOList.get(userOList.size() - 1);
-        assertThat(testUserO.getUserName()).isEqualTo(UPDATED_USER_NAME);
         assertThat(testUserO.getPassword()).isEqualTo(UPDATED_PASSWORD);
         assertThat(testUserO.getEmail()).isEqualTo(UPDATED_EMAIL);
     }
@@ -313,12 +304,12 @@ class UserOResourceIT {
     @Transactional
     void patchNonExistingUserO() throws Exception {
         int databaseSizeBeforeUpdate = userORepository.findAll().size();
-        userO.setId(count.incrementAndGet());
+        userO.setUserName(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restUserOMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, userO.getId())
+                patch(ENTITY_API_URL_ID, userO.getUserName())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(userO))
             )
@@ -333,12 +324,12 @@ class UserOResourceIT {
     @Transactional
     void patchWithIdMismatchUserO() throws Exception {
         int databaseSizeBeforeUpdate = userORepository.findAll().size();
-        userO.setId(count.incrementAndGet());
+        userO.setUserName(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUserOMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, count.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(userO))
             )
@@ -353,7 +344,7 @@ class UserOResourceIT {
     @Transactional
     void patchWithMissingIdPathParamUserO() throws Exception {
         int databaseSizeBeforeUpdate = userORepository.findAll().size();
-        userO.setId(count.incrementAndGet());
+        userO.setUserName(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUserOMockMvc
@@ -369,13 +360,14 @@ class UserOResourceIT {
     @Transactional
     void deleteUserO() throws Exception {
         // Initialize the database
+        userO.setUserName(UUID.randomUUID().toString());
         userORepository.saveAndFlush(userO);
 
         int databaseSizeBeforeDelete = userORepository.findAll().size();
 
         // Delete the userO
         restUserOMockMvc
-            .perform(delete(ENTITY_API_URL_ID, userO.getId()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, userO.getUserName()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

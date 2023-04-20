@@ -71,8 +71,7 @@ class StudentGatlingTest extends Simulation {
             .post("/api/students")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
-                "studentId":null
-                , "studentName":"SAMPLE_TEXT"
+                "studentName":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_student_url"))).exitHereIfFailed

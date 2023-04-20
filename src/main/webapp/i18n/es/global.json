@@ -7,6 +7,20 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
+        "userO": "User O",
+        "student": "Student",
+        "academicProgram": "Academic Program",
+        "profesor": "Profesor",
+        "enrollCourse": "Enroll Course",
+        "role": "Role",
+        "course": "Course",
+        "courseQuestion": "Course Question",
+        "profesorQuestion": "Profesor Question",
+        "academicPeriod": "Academic Period",
+        "evaluationCourse": "Evaluation Course",
+        "evaluationProfesor": "Evaluation Profesor",
+        "totalScoreCourse": "Total Score Course",
+        "totalScoreProfesor": "Total Score Profesor",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

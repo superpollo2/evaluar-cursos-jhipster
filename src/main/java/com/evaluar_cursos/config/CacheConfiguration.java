@@ -48,6 +48,30 @@ public class CacheConfiguration {
             createCache(cm, com.evaluar_cursos.domain.User.class.getName());
             createCache(cm, com.evaluar_cursos.domain.Authority.class.getName());
             createCache(cm, com.evaluar_cursos.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.evaluar_cursos.domain.UserO.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.Student.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.AcademicProgram.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.AcademicProgram.class.getName() + ".students");
+            createCache(cm, com.evaluar_cursos.domain.Profesor.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.EnrollCourse.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.Role.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.Course.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.CourseQuestion.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.ProfesorQuestion.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.Student.class.getName() + ".enrollCourses");
+            createCache(cm, com.evaluar_cursos.domain.AcademicProgram.class.getName() + ".enrollCourses");
+            createCache(cm, com.evaluar_cursos.domain.Profesor.class.getName() + ".enrollCourses");
+            createCache(cm, com.evaluar_cursos.domain.Profesor.class.getName() + ".totalScoreCourses");
+            createCache(cm, com.evaluar_cursos.domain.Role.class.getName() + ".userOS");
+            createCache(cm, com.evaluar_cursos.domain.Course.class.getName() + ".totalScoreCourses");
+            createCache(cm, com.evaluar_cursos.domain.AcademicPeriod.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.AcademicPeriod.class.getName() + ".enrollCourses");
+            createCache(cm, com.evaluar_cursos.domain.AcademicPeriod.class.getName() + ".totalScoreCourses");
+            createCache(cm, com.evaluar_cursos.domain.AcademicPeriod.class.getName() + ".totalScoreProfesors");
+            createCache(cm, com.evaluar_cursos.domain.EvaluationCourse.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.EvaluationProfesor.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.TotalScoreCourse.class.getName());
+            createCache(cm, com.evaluar_cursos.domain.TotalScoreProfesor.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
